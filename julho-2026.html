@@ -429,6 +429,18 @@
   table.tb + .add-card-btn{margin-top:12px;}
   #tblProdutos td.row-num, #tblDefeitoAvaria td.row-num{text-align:center;}
 
+  /* Editor de fatias dos gráficos de rosca — visível apenas em modo de edição */
+  .donut-editor{display:none; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line);}
+  body.edit-mode .donut-editor{display:block;}
+  .donut-editor-row{display:flex; align-items:center; gap:8px; padding:4px 2px; border-bottom:1px solid var(--line); font-family:'DM Sans',sans-serif; font-size:11.5px;}
+  .donut-editor-row:last-of-type{border-bottom:none;}
+  .donut-swatch{width:10px; height:10px; border-radius:50%; flex:0 0 auto;}
+  .donut-label{flex:1; min-width:0; color:var(--ink);}
+  .donut-value{width:48px; flex:0 0 auto; text-align:right; color:var(--ink-soft);}
+  .donut-editor .remove-row-btn{display:inline-flex; position:static; flex:0 0 auto;}
+  .donut-editor .add-card-btn{margin-top:8px; padding:7px 14px; font-size:11px;}
+  @media print{.donut-editor{display:none !important;}}
+
 
   /* ===== Proteção do modo de exibição ===== */
   /* Controles que alteram conteúdo só aparecem após desbloqueio por senha */
@@ -504,13 +516,13 @@
   align-items: stretch !important;
 }
 </style>
-<meta id="bbafmabaelnnkondpfpjmdklbmfnbmol"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+</head>
 <body class="edit-mode">
 
 <div id="deck">
 
   <!-- SLIDE 1 — CAPA -->
-  <section class="slide cover-slide active" data-slide="1">
+  <section class="slide cover-slide" data-slide="1">
     <div class="cover-image" role="img" aria-label="Overview Customer Experience Tania Bulhões"></div>
   </section>
 
@@ -532,10 +544,25 @@
         <div class="card">
           <h3>Principais motivos de contato</h3>
           <div class="chart-wrap"><canvas id="chartMotivos" width="646" height="262" style="display: block; box-sizing: border-box; height: 210px; width: 517px;"></canvas></div>
+          <div class="donut-editor" data-chart="chartMotivos">
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#2C4F3A;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Outros Temas (42)</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">59</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#B89A5E;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Disponibilidade de Produto</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">12</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#6B8F76;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Rastreio</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">7</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#D9C79A;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Vendas</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">7</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#8C8266;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Problemas de Entrega</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">6</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <button type="button" class="add-card-btn" onclick="addDonutSlice('chartMotivos')">+ Adicionar fatia</button>
+          </div>
         </div>
         <div class="card">
           <h3>Principais problemas relatados</h3>
           <div class="chart-wrap"><canvas id="chartProblemas" width="646" height="262" style="display: block; box-sizing: border-box; height: 210px; width: 517px;"></canvas></div>
+          <div class="donut-editor" data-chart="chartProblemas">
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#2C4F3A;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Problemas na Entrega</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">46,2</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#B89A5E;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto com Defeito</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">24,7</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#6B8F76;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto com Avaria</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">14</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#D9C79A;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Reclame Aqui</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">10,8</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <button type="button" class="add-card-btn" onclick="addDonutSlice('chartProblemas')">+ Adicionar fatia</button>
+          </div>
         </div>
       </div>
       <div class="insight-banner" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1"><b>Problemas </b>representa&nbsp;<b>11%&nbsp;</b>do total de contatos. Dentro desse volume&nbsp;<font color="#1f3a2a"><b>46,2%</b></font>&nbsp;estão relacionados a <font color="#1f3a2a"><b>atrasos na entrega</b></font>, seguidos por defeito de produto, com&nbsp;<b style="color: rgb(31, 58, 42);">24,7% </b>e <b style="color: rgb(31, 58, 42);">14,%&nbsp;</b>produto com avaria.</div>
@@ -680,7 +707,7 @@
       <div class="kpi-row" style="grid-template-columns:1.35fr 1fr 1fr 1fr; margin-bottom:20px;">
         <div class="kpi-card" style="border-left-color:var(--bad);">
           <div class="lbl" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Total acumulado</div>
-          <div class="val" id="trocasTotalAcumulado" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">R$&nbsp;385.581</div>
+          <div class="val" id="trocasTotalAcumulado" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">R$ 400.903</div>
           <div class="delta flat" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">Jan a Jul 2026</div>
         </div>
         <div class="kpi-card" style="border-left-color:var(--gold);">
@@ -690,13 +717,13 @@
         </div>
         <div class="kpi-card">
           <div class="lbl" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Total de Devoluções</div>
-          <div class="val" id="trocasTotalDevolucoes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">R$&nbsp;271.128</div>
-          <div class="delta flat" id="trocasPercDevolucoes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">70,3% do total</div>
+          <div class="val" id="trocasTotalDevolucoes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">R$&nbsp;283.396</div>
+          <div class="delta flat" id="trocasPercDevolucoes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">71% do total</div>
         </div>
         <div class="kpi-card">
           <div class="lbl" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">total de Trocas</div>
-          <div class="val" id="trocasTotalTrocas" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">R$&nbsp;114.453</div>
-          <div class="delta flat" id="trocasPercTrocas" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">29,7% do total</div>
+          <div class="val" id="trocasTotalTrocas" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">R$&nbsp;117.507</div>
+          <div class="delta flat" id="trocasPercTrocas" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">29% do total</div>
         </div>
       </div>
 
@@ -721,7 +748,7 @@
   </section>
 
   <!-- SLIDE 5 — TROCAS & DEVOLUÇÕES MOTIVOS -->
-  <section class="slide" data-slide="6">
+  <section class="slide active" data-slide="6">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
       <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Trocas &amp; Devoluções — Motivos</h2>
@@ -740,13 +767,20 @@
         <div class="card">
           <h3>Principais motivos de devolução</h3>
           <div class="chart-wrap"><canvas id="chartMotivosDevolucao" width="637" height="262" style="display: block; box-sizing: border-box; height: 210px; width: 509px;"></canvas></div>
+          <div class="donut-editor" data-chart="chartMotivosDevolucao">
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#2C4F3A;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Desistência ou Arrependimento</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">66,8</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#B89A5E;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto com Defeito</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">11</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#6B8F76;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Problemas na Entrega</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">9</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <div class="donut-editor-row"><span class="donut-swatch" style="background:#D9C79A;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto Avariado</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">8,4</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
+            <button type="button" class="add-card-btn" onclick="addDonutSlice('chartMotivosDevolucao')">+ Adicionar fatia</button>
+          </div>
         </div>
       </div>
 
       <div class="card">
         <h3 contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produtos mais devolvidos em julho</h3>
         <table class="tb" id="tblProdutos">
-          <thead><tr><th style="width:40px; text-align:center;">#</th><th>Produto</th><th style="text-align:center;">Qtde. Devolvida</th><th style="text-align:center;">%</th><th style="text-align:center;">Valor Devolvido</th><th class="row-actions-th"></th></tr></thead>
+          <thead><tr><th style="width:40px; text-align:center;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">#</th><th contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto</th><th style="text-align:center;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Qtde. Devolvida</th><th style="text-align:center;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">%</th><th style="text-align:center;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Valor Devolvido</th><th class="row-actions-th"></th></tr></thead>
           <tbody>
             <tr><td class="row-num">01</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Copo Fantasia Floresta</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">21 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
             <tr><td class="row-num">02</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Prato Raso Entre Rios</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">21 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
@@ -762,7 +796,7 @@
       <div class="card" style="margin-top:18px;">
         <h3 contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produtos com mais Defeito e Avaria em julho</h3>
         <table class="tb" id="tblDefeitoAvaria">
-          <thead><tr><th style="width:40px; text-align:center;">#</th><th>Produto</th><th style="text-align:center;">Qtde. Devolvida</th><th style="text-align:center;">%</th><th style="text-align:center;">Valor Devolvido</th><th class="row-actions-th"></th></tr></thead>
+          <thead><tr><th style="width:40px; text-align:center;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">#</th><th contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto</th><th style="text-align:center;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Qtde. Devolvida</th><th style="text-align:center;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">%</th><th style="text-align:center;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Valor Devolvido</th><th class="row-actions-th"></th></tr></thead>
           <tbody>
             <tr><td class="row-num">01</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto 1</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">0 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
             <tr><td class="row-num">02</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto 2</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">0 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
@@ -933,9 +967,9 @@
   <div class="left">
     <button id="prevBtn">← Anterior</button>
     <button id="nextBtn">Próximo →</button>
-    <span id="slideLabel">1 / 10</span>
+    <span id="slideLabel">6 / 10</span>
   </div>
-  <div id="dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div id="dots"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="active"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
   <div class="right">
     <span id="saveNote" class="">alterações salvas</span>
     <span id="ghSyncNote" class="busy">GitHub: salvando…</span>
@@ -945,7 +979,7 @@
   </div>
 </div>
 
-<div id="ghOverlay" class="show">
+<div id="ghOverlay" class="">
   <div id="ghPanel">
     <h4>Publicar no GitHub</h4>
     <p class="hint">Configure uma vez. O token e os dados ficam salvos apenas neste navegador e são usados só para chamar a API do GitHub.</p>
@@ -1370,8 +1404,11 @@
   Chart.defaults.font.family = "'DM Sans', sans-serif";
   Chart.defaults.color = '#6b6d64';
 
+  const donutCharts = {};
+  const DONUT_PALETTE = [GREEN, GOLD, SAGE, GOLD_LIGHT, OLIVE, '#A9714B', '#4B6B57', '#C9B48C'];
+
   function donut(id, labels, data, colors){
-    new Chart(document.getElementById(id), {
+    const chart = new Chart(document.getElementById(id), {
       type:'doughnut',
       data:{ labels, datasets:[{ data, backgroundColor:colors, borderWidth:2, borderColor:'#FBFAF6' }] },
       options:{
@@ -1386,11 +1423,65 @@
         maintainAspectRatio:false
       }
     });
+    donutCharts[id] = chart;
+    return chart;
   }
 
   donut('chartMotivos', ['Outros Temas (42)','Disponibilidade de Produto','Rastreio','Vendas','Problemas de Entrega'], [59,12,7,7,6], [GREEN, GOLD, SAGE, GOLD_LIGHT, OLIVE]);
   donut('chartProblemas', ['Problemas na Entrega','Produto com Defeito','Produto com Avaria','Reclame Aqui'], [46.2,24.7,14,10.8], [GREEN, GOLD, SAGE, GOLD_LIGHT]);
   donut('chartMotivosDevolucao', ['Desistência ou Arrependimento','Produto com Defeito','Problemas na Entrega','Produto Avariado'], [66.8,11,9,8.4], [GREEN, GOLD, SAGE, GOLD_LIGHT]);
+
+  // Editor de fatias dos gráficos de rosca: label, valor e cor acompanham o gráfico em tempo real
+  function updateDonutFromEditor(canvasId){
+    const editor = document.querySelector('.donut-editor[data-chart="' + canvasId + '"]');
+    const chart = donutCharts[canvasId];
+    if(!editor || !chart) return;
+    const rows = Array.from(editor.querySelectorAll('.donut-editor-row'));
+    const labels = [], data = [], colors = [];
+    rows.forEach(row => {
+      labels.push(row.querySelector('.donut-label').textContent.trim());
+      const raw = row.querySelector('.donut-value').textContent.replace('%', '').trim().replace(',', '.');
+      const n = parseFloat(raw);
+      data.push(Number.isFinite(n) ? n : 0);
+      colors.push(row.querySelector('.donut-swatch').style.backgroundColor);
+    });
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = data;
+    chart.data.datasets[0].backgroundColor = colors;
+    chart.update();
+  }
+  function addDonutSlice(canvasId){
+    const editor = document.querySelector('.donut-editor[data-chart="' + canvasId + '"]');
+    if(!editor) return;
+    const addBtn = editor.querySelector('.add-card-btn');
+    const rowCount = editor.querySelectorAll('.donut-editor-row').length;
+    const color = DONUT_PALETTE[rowCount % DONUT_PALETTE.length];
+    const row = document.createElement('div');
+    row.className = 'donut-editor-row';
+    row.innerHTML =
+      '<span class="donut-swatch" style="background:' + color + ';"></span>' +
+      '<span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Nova fatia</span>' +
+      '<span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">0</span>' +
+      '<button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button>';
+    if(addBtn) addBtn.insertAdjacentElement('beforebegin', row); else editor.appendChild(row);
+    updateDonutFromEditor(canvasId);
+  }
+  function removeDonutSlice(btn){
+    const row = btn.closest('.donut-editor-row');
+    const editor = row.closest('.donut-editor');
+    const canvasId = editor ? editor.getAttribute('data-chart') : null;
+    row.remove();
+    if(canvasId) updateDonutFromEditor(canvasId);
+  }
+  (function initDonutEditors(){
+    document.querySelectorAll('.donut-editor').forEach(editor => {
+      editor.addEventListener('input', e => {
+        if(e.target && (e.target.classList.contains('donut-label') || e.target.classList.contains('donut-value'))){
+          updateDonutFromEditor(editor.getAttribute('data-chart'));
+        }
+      });
+    });
+  })();
 
   new Chart(document.getElementById('chartCsat'), {
     type:'bar',
