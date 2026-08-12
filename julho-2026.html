@@ -412,6 +412,29 @@
 
   @media print{.remove-card-btn{display:none !important;}}
 
+
+  /* ===== Proteção do modo de exibição ===== */
+  /* Controles que alteram conteúdo só aparecem após desbloqueio por senha */
+  .add-card-btn, .add-slot-btn, .remove-card-btn{display:none !important;}
+  body.edit-mode .add-card-btn{display:inline-block !important;}
+  body.edit-mode .add-slot-btn{display:flex !important;}
+  body.edit-mode .remove-card-btn{display:flex !important;}
+
+  /* Upload/troca de imagens bloqueado no modo de exibição */
+  body:not(.edit-mode) .photo-slot{pointer-events:none !important; cursor:default !important;}
+  body:not(.edit-mode) .photo-slot.has-img::after{display:none !important;}
+  body:not(.edit-mode) .photo-slot:not(.has-img) .plus,
+  body:not(.edit-mode) .photo-slot:not(.has-img) .lbl2{visibility:hidden !important;}
+  body:not(.edit-mode) .photo-slot:not(.has-img){border-color:transparent !important; background:transparent !important;}
+
+  /* Nenhum campo apresenta aparência de edição fora do modo autorizado */
+  body:not(.edit-mode) [data-cx-editable="true"],
+  body:not(.edit-mode) [data-channel-edit="true"]{
+    outline:none !important;
+    cursor:default !important;
+    user-select:text;
+  }
+
 </style>
 
 <style id="numeric-card-font-refinement">
@@ -640,23 +663,23 @@
       <div class="kpi-row" style="grid-template-columns:1.35fr 1fr 1fr 1fr; margin-bottom:20px;">
         <div class="kpi-card" style="border-left-color:var(--bad);">
           <div class="lbl" contenteditable="true">Total acumulado</div>
-          <div class="val" id="trocasTotalAcumulado">R$ 385.586</div>
-          <div class="delta flat">Jan a Jul 2026</div>
+          <div class="val" id="trocasTotalAcumulado" data-cx-editable="true">R$ 385.586</div>
+          <div class="delta flat" data-cx-editable="true">Jan a Jul 2026</div>
         </div>
         <div class="kpi-card" style="border-left-color:var(--gold);">
           <div class="lbl" contenteditable="true">Total julho</div>
-          <div class="val" id="trocasTotalMes">R$ 73.400</div>
-          <div class="delta" id="trocasVariacaoMes">▲ +86,6% vs. junho</div>
+          <div class="val" id="trocasTotalMes" data-cx-editable="true">R$ 73.400</div>
+          <div class="delta" id="trocasVariacaoMes" data-cx-editable="true">▲ +86,6% vs. junho</div>
         </div>
         <div class="kpi-card">
           <div class="lbl" contenteditable="true">Devoluções</div>
-          <div class="val" id="trocasTotalDevolucoes">R$ 271.131</div>
-          <div class="delta flat" id="trocasPercDevolucoes">70,3% do total</div>
+          <div class="val" id="trocasTotalDevolucoes" data-cx-editable="true">R$ 271.131</div>
+          <div class="delta flat" id="trocasPercDevolucoes" data-cx-editable="true">70,3% do total</div>
         </div>
         <div class="kpi-card">
           <div class="lbl" contenteditable="true">Trocas</div>
-          <div class="val" id="trocasTotalTrocas">R$ 114.455</div>
-          <div class="delta flat" id="trocasPercTrocas">29,7% do total</div>
+          <div class="val" id="trocasTotalTrocas" data-cx-editable="true">R$ 114.455</div>
+          <div class="delta flat" id="trocasPercTrocas" data-cx-editable="true">29,7% do total</div>
         </div>
       </div>
 
@@ -972,12 +995,30 @@
   const saveNote = document.getElementById('saveNote');
   const STORAGE_KEY = 'cx-overview-jul26-edits';
 
-  // snapshot dos campos de texto editáveis, capturado antes de qualquer alteração,
-  // e marcado com um atributo estável (independe do valor de contenteditable)
-  const editableFields = Array.from(document.querySelectorAll('[contenteditable="true"]'));
-  editableFields.forEach(el => el.setAttribute('data-cx-editable', 'true'));
+  // Registra todos os campos permitidos para edição.
+  // Além dos campos já marcados no HTML, todos os textos dos cards KPI ficam editáveis
+  // somente quando o modo protegido por senha estiver ativo.
+  let editableFields = [];
+  function refreshEditableFields(root = document){
+    const selector = [
+      '[contenteditable="true"]',
+      '[data-cx-editable="true"]',
+      '.kpi-card .lbl', '.kpi-card .val', '.kpi-card .delta',
+      '.kpi-card .note', '.kpi-card .kpi-label', '.kpi-card .kpi-value', '.kpi-card .kpi-sub'
+    ].join(',');
+    root.querySelectorAll(selector).forEach(el => el.setAttribute('data-cx-editable', 'true'));
+    editableFields = Array.from(document.querySelectorAll('[data-cx-editable="true"]'));
+    editableFields.forEach(el=>{
+      if(!el.dataset.cxBlurBound){
+        el.addEventListener('blur', ()=> saveEdit(el));
+        el.dataset.cxBlurBound = '1';
+      }
+    });
+  }
+  refreshEditableFields();
 
   function setEditable(on){
+    refreshEditableFields();
     document.body.classList.toggle('edit-mode', on);
     editBtn.textContent = on ? 'Sair da edição' : 'Ativar edição';
     editBtn.classList.toggle('on', on);
@@ -992,6 +1033,14 @@
   }
   setEditable(false);
   const EDIT_PASSWORD = 'tb2026';
+  function isEditAuthorized(){
+    return document.body.classList.contains('edit-mode');
+  }
+  function requireEditMode(){
+    if(isEditAuthorized()) return true;
+    alert('Ative o modo de edição e informe a senha para fazer alterações.');
+    return false;
+  }
   editBtn.addEventListener('click', ()=>{
     const turningOn = !document.body.classList.contains('edit-mode');
     if(turningOn){
@@ -1032,6 +1081,8 @@
 
   loadMediaState();
   ensureMediaCardControls();
+  refreshEditableFields();
+  setEditable(false);
 
   // persist edits to localStorage, keyed by a stable path per editable element
   function pathFor(el){
@@ -1059,12 +1110,12 @@
     saveEdit._t = setTimeout(()=>saveNote.classList.remove('show'), 1200);
     scheduleGithubSync();
   }
-  editableFields.forEach(el=>{
-    el.addEventListener('blur', ()=> saveEdit(el));
-  });
+  refreshEditableFields();
   loadEdits();
+  setEditable(false);
 
   function saveAllData(){
+    if(!requireEditMode()) return;
     try{
       const saved = {};
       editableFields.forEach(el=>{
@@ -1153,6 +1204,7 @@
   }
 
   function handleCoverPhotoUpload(input){
+    if(!requireEditMode()) return;
     const file = input.files && input.files[0];
     if(!file || !coverPhotoSlot) return;
     const reader = new FileReader();
@@ -1169,6 +1221,7 @@
   }
 
   function resetCoverPhoto(){
+    if(!requireEditMode()) return;
     if(!coverPhotoSlot) return;
     coverPhotoSlot.style.backgroundImage = originalCoverBg;
     try{ localStorage.removeItem(COVER_PHOTO_KEY); }catch(e){}
@@ -1178,6 +1231,7 @@
 
     // ===== photo slots (upload local, sem envio a servidor) =====
   function handlePhotoUpload(input){
+    if(!requireEditMode()) return;
     const file = input.files && input.files[0];
     if(!file) return;
     const slot = input.closest('.photo-slot');
@@ -1194,6 +1248,7 @@
     reader.readAsDataURL(file);
   }
   function addPhotoSlot(containerId, size){
+    if(!requireEditMode()) return;
     const container = document.getElementById(containerId);
     if(!container) return;
     const btn = container.querySelector('.add-slot-btn');
@@ -1203,6 +1258,7 @@
     if(btn){ container.insertBefore(label, btn); } else { container.appendChild(label); }
   }
   function addMediaCard(gridId, withHandle){
+    if(!requireEditMode()) return;
     const grid = document.getElementById(gridId);
     if(!grid) return;
     const card = document.createElement('div');
@@ -1217,13 +1273,13 @@
       '</label>' + handleHtml +
       '<p style="font-size:12px;color:var(--ink-soft);line-height:1.6;text-align:left;' + (withHandle ? 'margin-top:8px;' : '') + '" contenteditable="true">Adicione uma legenda...</p>';
     grid.appendChild(card);
-    card.querySelectorAll('[contenteditable="true"]').forEach(el=>{
-      el.addEventListener('blur', ()=> saveEdit(el));
-    });
+    refreshEditableFields(card);
+    card.querySelectorAll('[data-cx-editable="true"]').forEach(el=>el.setAttribute('contenteditable','true'));
     saveMediaState();
   }
 
   function removeMediaCard(button){
+    if(!requireEditMode()) return;
     const card = button && button.closest('.card');
     if(!card) return;
     card.remove();
@@ -1341,7 +1397,7 @@
       scales:{ x:{ grid:{ display:false }, stacked:true }, y:{ stacked:true, ticks:{ color:'#6F716B', font:{ family:"'Cormorant Garamond', Georgia, serif", style:'normal', weight:400, size:10 }, callback:v=>'R$ '+(v/1000)+'k' }, grid:{ color:'#EDE6D6' } } },
       plugins:{
         legend:{ display:true, position:'top', align:'center', labels:{ boxWidth:11, boxHeight:11, padding:16, usePointStyle:false, font:{ size:12, weight:600 } } },
-        datalabels:{ color:'#5F625C', font:{ family:"'Cormorant Garamond', Georgia, serif", style:'normal', weight:500, size:10 }, formatter:v=>'R$ '+(v/1000).toFixed(0)+'k' } } }
+        datalabels:{ color:'#FFFFFF', font:{ family:"'DM Sans', sans-serif", style:'normal', weight:500, size:10 }, formatter:v=>'R$ '+(v/1000).toFixed(0)+'k' } } }
   });
 
 
