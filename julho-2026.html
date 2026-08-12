@@ -637,10 +637,27 @@
       <h2 class="slide-title" contenteditable="true">Trocas &amp; Devoluções</h2>
       <div class="slide-sub" contenteditable="true">Acumulado Janeiro – Julho 2026</div>
 
-      <div class="kpi-row n3" style="margin-bottom:20px;">
-        <div class="kpi-card" style="border-left-color:var(--bad);"><div class="lbl" contenteditable="true" data-edit-key="returns-total-label">Total (unidades)</div><div class="val" contenteditable="true">385.914</div><div class="delta up" contenteditable="true">▲ +76,5% vs. junho</div></div>
-        <div class="kpi-card"><div class="lbl" contenteditable="true" data-edit-key="returns-refunds-label">Devoluções</div><div class="val" contenteditable="true">266.711</div><div class="delta flat" contenteditable="true">69% do total</div></div>
-        <div class="kpi-card"><div class="lbl" contenteditable="true" data-edit-key="returns-exchanges-label">Trocas</div><div class="val" contenteditable="true">114.905</div><div class="delta flat" contenteditable="true">30% do total</div></div>
+      <div class="kpi-row" style="grid-template-columns:1.35fr 1fr 1fr 1fr; margin-bottom:20px;">
+        <div class="kpi-card" style="border-left-color:var(--bad);">
+          <div class="lbl" contenteditable="true">Total acumulado</div>
+          <div class="val" id="trocasTotalAcumulado">R$ 385.586</div>
+          <div class="delta flat">Jan a Jul 2026</div>
+        </div>
+        <div class="kpi-card" style="border-left-color:var(--gold);">
+          <div class="lbl" contenteditable="true">Total julho</div>
+          <div class="val" id="trocasTotalMes">R$ 73.400</div>
+          <div class="delta" id="trocasVariacaoMes">▲ +86,6% vs. junho</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl" contenteditable="true">Devoluções</div>
+          <div class="val" id="trocasTotalDevolucoes">R$ 271.131</div>
+          <div class="delta flat" id="trocasPercDevolucoes">70,3% do total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl" contenteditable="true">Trocas</div>
+          <div class="val" id="trocasTotalTrocas">R$ 114.455</div>
+          <div class="delta flat" id="trocasPercTrocas">29,7% do total</div>
+        </div>
       </div>
 
       <div class="card">
@@ -649,13 +666,13 @@
         <table class="tb" style="margin-top:14px;" id="tblTrocas">
           <thead><tr><th>Mês</th><th>Troca</th><th>Devolução</th><th>Total</th><th>Variação mensal</th></tr></thead>
           <tbody>
-            <tr><td>Jan</td><td contenteditable="true">R$ 25.145</td><td contenteditable="true">R$ 49.283</td><td data-auto-total="true">R$ 74.428</td><td data-auto-variation="true">–</td></tr>
-            <tr><td>Fev</td><td contenteditable="true">R$ 12.790</td><td contenteditable="true">R$ 40.809</td><td data-auto-total="true">R$ 53.599</td><td data-auto-variation="true"><span class="pill mid">-28%</span></td></tr>
-            <tr><td>Mar</td><td contenteditable="true">R$ 27.619</td><td contenteditable="true">R$ 39.146</td><td data-auto-total="true">R$ 66.765</td><td data-auto-variation="true"><span class="pill mid">25%</span></td></tr>
-            <tr><td>Abr</td><td contenteditable="true">R$ 12.755</td><td contenteditable="true">R$ 25.231</td><td data-auto-total="true">R$ 37.986</td><td data-auto-variation="true"><span class="pill bad">-43%</span></td></tr>
-            <tr><td>Mai</td><td contenteditable="true">R$ 9.803</td><td contenteditable="true">R$ 30.240</td><td data-auto-total="true">R$ 40.043</td><td data-auto-variation="true"><span class="pill good">5%</span></td></tr>
-            <tr><td>Jun</td><td contenteditable="true">R$ 12.711</td><td contenteditable="true">R$ 26.629</td><td data-auto-total="true">R$ 39.340</td><td data-auto-variation="true"><span class="pill good">-2%</span></td></tr>
-            <tr><td>Jul</td><td contenteditable="true">R$ 14.060</td><td contenteditable="true">R$ 55.370</td><td data-auto-total="true">R$ 69.430</td><td data-auto-variation="true"><span class="pill bad">76%</span></td></tr>
+            <tr><td>Jan</td><td contenteditable="true">R$ 25.145,65</td><td contenteditable="true">R$ 49.283,03</td><td>R$ 74.428,68</td><td>–</td></tr>
+            <tr><td>Fev</td><td contenteditable="true">R$ 12.790,70</td><td contenteditable="true">R$ 40.809,41</td><td>R$ 53.600,11</td><td><span class="pill">−28,0%</span></td></tr>
+            <tr><td>Mar</td><td contenteditable="true">R$ 27.619,15</td><td contenteditable="true">R$ 39.146,81</td><td>R$ 66.765,96</td><td><span class="pill">+24,6%</span></td></tr>
+            <tr><td>Abr</td><td contenteditable="true">R$ 12.775,00</td><td contenteditable="true">R$ 25.231,40</td><td>R$ 38.006,40</td><td><span class="pill">−43,1%</span></td></tr>
+            <tr><td>Mai</td><td contenteditable="true">R$ 9.803,08</td><td contenteditable="true">R$ 30.240,74</td><td>R$ 40.043,82</td><td><span class="pill">+5,4%</span></td></tr>
+            <tr><td>Jun</td><td contenteditable="true">R$ 12.711,00</td><td contenteditable="true">R$ 26.629,70</td><td>R$ 39.340,70</td><td><span class="pill">−1,8%</span></td></tr>
+            <tr><td>Jul</td><td contenteditable="true">R$ 13.610,00</td><td contenteditable="true">R$ 59.790,00</td><td>R$ 73.400,00</td><td><span class="pill">+86,6%</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -672,11 +689,11 @@
       <div class="grid-2" style="margin-bottom:18px;">
         <div class="card stat-highlight">
           <div class="num" contenteditable="true">63,8%</div>
-          <p contenteditable="true">Desistência ou arrependimento é o maior motivo de troca e devolução, muito à frente de defeito ou avaria de produto.</p>
+          <p contenteditable="true">dos casos de troca e devolução em julho foram motivados por desistência ou arrependimento, principal motivo do período.</p>
           <div class="grid-3" style="margin-top:16px; text-align:left;">
-            <div class="kpi-card" style="border-left-color:var(--bad);"><div class="lbl">Total Julho</div><div class="val" style="font-size:20px;" contenteditable="true">+77%</div><div class="delta">vs. média abr–jun</div></div>
-            <div class="kpi-card" style="border-left-color:var(--bad);"><div class="lbl">Devoluções</div><div class="val" style="font-size:20px;" contenteditable="true">+102,3%</div><div class="delta">vs. média abr–jun</div></div>
-            <div class="kpi-card" style="border-left-color:var(--bad);"><div class="lbl">Volume</div><div class="val" style="font-size:20px;" contenteditable="true">+187%</div><div class="delta">vs. média abr–jun</div></div>
+            <div class="kpi-card" style="border-left-color:var(--bad);"><div class="lbl">Total Julho</div><div class="val" style="font-size:20px;" contenteditable="true">+87,5%</div><div class="delta">vs. média abr–jun</div></div>
+            <div class="kpi-card" style="border-left-color:var(--bad);"><div class="lbl">Devoluções</div><div class="val" style="font-size:20px;" contenteditable="true">+118,5%</div><div class="delta">vs. média abr–jun</div></div>
+            <div class="kpi-card" style="border-left-color:var(--bad);"><div class="lbl">Trocas</div><div class="val" style="font-size:20px;" contenteditable="true">+15,7%</div><div class="delta">vs. média abr–jun</div></div>
           </div>
         </div>
         <div class="card">
@@ -1313,100 +1330,86 @@
         } } }
   });
 
-  const chartTrocas = new Chart(document.getElementById('chartTrocas'), {
+  const trocasChart = new Chart(document.getElementById('chartTrocas'), {
     type:'bar',
     data:{ labels:['jan','fev','mar','abr','mai','jun','jul'],
       datasets:[
-        { label:'Devolução', data:[49283,40809,39146,25231,30240,26629,55370], backgroundColor:'#6B8F76', stack:'s', borderRadius:3 },
-        { label:'Troca', data:[25145,12790,27619,12755,9803,12711,14060], backgroundColor:'#D9C79A', stack:'s', borderRadius:3 }
+        { label:'Devolução', data:[49283.03,40809.41,39146.81,25231.40,30240.74,26629.70,59790], backgroundColor:'#6B8F76', stack:'s', borderRadius:3 },
+        { label:'Troca', data:[25145.65,12790.70,27619.15,12775,9803.08,12711,13610], backgroundColor:'#D9C79A', stack:'s', borderRadius:3 }
       ]},
     options:{ maintainAspectRatio:false,
-      scales:{ x:{ grid:{ display:false }, stacked:true }, y:{ stacked:true, ticks:{ color:'#6F716B', font:{ family:"'Cormorant Garamond', Georgia, serif", style:'italic', weight:500, size:10 }, callback:v=>'R$ '+(v/1000)+'k' }, grid:{ color:'#EDE6D6' } } },
+      scales:{ x:{ grid:{ display:false }, stacked:true }, y:{ stacked:true, ticks:{ color:'#6F716B', font:{ family:"'Cormorant Garamond', Georgia, serif", style:'normal', weight:400, size:10 }, callback:v=>'R$ '+(v/1000)+'k' }, grid:{ color:'#EDE6D6' } } },
       plugins:{
         legend:{ display:true, position:'top', align:'center', labels:{ boxWidth:11, boxHeight:11, padding:16, usePointStyle:false, font:{ size:12, weight:600 } } },
-        datalabels:{ color:'#FFFFFF', font:{ family:"'Cormorant Garamond', Georgia, serif", style:'italic', weight:500, size:12 }, formatter:v=>'R$ '+(v/1000).toFixed(0)+'k' } } }
+        datalabels:{ color:'#5F625C', font:{ family:"'Cormorant Garamond', Georgia, serif", style:'normal', weight:500, size:10 }, formatter:v=>'R$ '+(v/1000).toFixed(0)+'k' } } }
   });
 
-  // Trocas & Devoluções: tabela, totais, variação mensal e gráfico sincronizados automaticamente.
-  function parseMoneyCell(value){
-    let raw = (value || '').replace(/\u00a0/g, ' ').trim();
-    if(!raw) return null;
-    raw = raw.replace(/R\$/gi, '').replace(/\s/g, '');
-    if(raw.includes(',')){
-      raw = raw.replace(/\./g, '').replace(',', '.');
-    }else if(/^[-+]?\d{1,3}(?:\.\d{3})+$/.test(raw)){
-      raw = raw.replace(/\./g, '');
-    }
-    raw = raw.replace(/[^0-9.+-]/g, '');
-    const number = Number(raw);
-    return Number.isFinite(number) ? number : null;
-  }
 
-  function formatMoneyCell(value){
-    return 'R$ ' + new Intl.NumberFormat('pt-BR', {
-      minimumFractionDigits: Number.isInteger(value) ? 0 : 2,
-      maximumFractionDigits: 2
-    }).format(value);
+  // Trocas e devoluções: cards, totais, variação e gráfico acompanham a tabela automaticamente
+  function parseBRLCell(text){
+    const raw = String(text || '').replace(/R\$|\s/g,'').replace(/\./g,'').replace(',','.').replace(/[^0-9.-]/g,'');
+    const n = parseFloat(raw);
+    return Number.isFinite(n) ? n : 0;
   }
-
+  function formatBRL(value, decimals = 0){
+    return value.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:decimals,maximumFractionDigits:decimals});
+  }
+  function formatPct(value){
+    const sign = value > 0 ? '+' : '';
+    return sign + value.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1}) + '%';
+  }
   function updateTrocasFromTable(){
     const table = document.getElementById('tblTrocas');
-    if(!table || !chartTrocas) return;
+    if(!table) return;
     const rows = Array.from(table.tBodies[0].rows);
-    const trocas = [];
-    const devolucoes = [];
-    const totals = [];
-
-    rows.forEach((row, index) => {
-      const troca = parseMoneyCell(row.cells[1].textContent);
-      const devolucao = parseMoneyCell(row.cells[2].textContent);
-      const hasAnyValue = troca !== null || devolucao !== null;
-      const total = hasAnyValue ? (troca || 0) + (devolucao || 0) : null;
-
-      trocas.push(troca || 0);
-      devolucoes.push(devolucao || 0);
-      totals.push(total);
-
-      const totalCell = row.querySelector('[data-auto-total="true"]');
-      if(totalCell) totalCell.textContent = total === null ? '' : formatMoneyCell(total);
-
-      const variationCell = row.querySelector('[data-auto-variation="true"]');
-      if(variationCell){
-        if(index === 0){
-          variationCell.textContent = '–';
-        }else{
-          const previous = totals[index - 1];
-          let label = '';
-          if(total !== null && previous !== null && previous !== 0){
-            const variation = ((total - previous) / previous) * 100;
-            const rounded = Math.round(variation);
-            label = (rounded > 0 ? '+' : '') + rounded + '%';
-          }
-          const pill = variationCell.querySelector('.pill');
-          if(pill) pill.textContent = label;
-          else variationCell.textContent = label;
-        }
+    const trocas = [], devolucoes = [], totais = [];
+    rows.forEach((row, i) => {
+      const troca = parseBRLCell(row.cells[1].textContent);
+      const devolucao = parseBRLCell(row.cells[2].textContent);
+      const total = troca + devolucao;
+      trocas.push(troca); devolucoes.push(devolucao); totais.push(total);
+      row.cells[3].textContent = formatBRL(total, 2);
+      if(i === 0){
+        row.cells[4].textContent = '–';
+      } else {
+        const prev = totais[i-1];
+        const variation = prev ? ((total / prev) - 1) * 100 : 0;
+        row.cells[4].innerHTML = '<span class="pill">' + formatPct(variation) + '</span>';
       }
     });
-
-    chartTrocas.data.labels = rows.map(row => (row.cells[0].textContent || '').trim().toLowerCase());
-    chartTrocas.data.datasets[0].data = devolucoes;
-    chartTrocas.data.datasets[1].data = trocas;
-    chartTrocas.update('none');
+    const totalTrocas = trocas.reduce((a,b)=>a+b,0);
+    const totalDevolucoes = devolucoes.reduce((a,b)=>a+b,0);
+    const totalAcumulado = totalTrocas + totalDevolucoes;
+    const last = totais.length - 1;
+    const totalMes = last >= 0 ? totais[last] : 0;
+    const prevMes = last > 0 ? totais[last-1] : 0;
+    const variacaoMes = prevMes ? ((totalMes / prevMes) - 1) * 100 : 0;
+    const el = id => document.getElementById(id);
+    if(el('trocasTotalAcumulado')) el('trocasTotalAcumulado').textContent = formatBRL(totalAcumulado,0);
+    if(el('trocasTotalMes')) el('trocasTotalMes').textContent = formatBRL(totalMes,0);
+    if(el('trocasVariacaoMes')) el('trocasVariacaoMes').textContent = (variacaoMes >= 0 ? '▲ ' : '▼ ') + formatPct(variacaoMes) + ' vs. junho';
+    if(el('trocasTotalDevolucoes')) el('trocasTotalDevolucoes').textContent = formatBRL(totalDevolucoes,0);
+    if(el('trocasTotalTrocas')) el('trocasTotalTrocas').textContent = formatBRL(totalTrocas,0);
+    if(el('trocasPercDevolucoes')) el('trocasPercDevolucoes').textContent = (totalAcumulado ? totalDevolucoes/totalAcumulado*100 : 0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1}) + '% do total';
+    if(el('trocasPercTrocas')) el('trocasPercTrocas').textContent = (totalAcumulado ? totalTrocas/totalAcumulado*100 : 0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1}) + '% do total';
+    if(typeof trocasChart !== 'undefined'){
+      trocasChart.data.labels = rows.map(r => r.cells[0].textContent.trim().toLowerCase());
+      trocasChart.data.datasets[0].data = devolucoes;
+      trocasChart.data.datasets[1].data = trocas;
+      trocasChart.update();
+    }
   }
-
   (function initTrocasAutomation(){
     const table = document.getElementById('tblTrocas');
     if(!table) return;
-    table.tBodies[0].querySelectorAll('tr').forEach(row => {
-      [row.cells[1], row.cells[2]].forEach(cell => {
-        cell.addEventListener('input', updateTrocasFromTable);
-        cell.addEventListener('blur', updateTrocasFromTable);
-      });
+    table.addEventListener('input', e => {
+      if(e.target && e.target.matches('td[contenteditable="true"]')) updateTrocasFromTable();
     });
+    table.addEventListener('blur', e => {
+      if(e.target && e.target.matches('td[contenteditable="true"]')) updateTrocasFromTable();
+    }, true);
     updateTrocasFromTable();
   })();
-
 
   // Garante renderização dos gráficos ao abrir/navegar, inclusive após mudança de tamanho da janela
   function refreshAllVisibleCharts(){
