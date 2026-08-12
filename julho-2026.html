@@ -411,6 +411,24 @@
 
   @media print{.remove-card-btn{display:none !important;}}
 
+  /* Subtítulos dos indicadores (Trocas & Devoluções overview e Motivos) com cor padronizada e sem negrito */
+  .slide[data-slide="5"] .kpi-row .delta,
+  .slide[data-slide="6"] .stat-highlight .delta{color:var(--ink-soft) !important; font-weight:400 !important;}
+
+  /* Colunas de ação (incluir/remover linha) das tabelas — visíveis apenas em modo de edição */
+  .row-actions, .row-actions-th{width:30px; text-align:center !important; padding:4px 6px !important;}
+  body:not(.edit-mode) .row-actions, body:not(.edit-mode) .row-actions-th{display:none;}
+  .remove-row-btn{
+    display:none; width:20px; height:20px; border-radius:50%; border:1px solid var(--line);
+    background:rgba(251,250,246,.94); color:var(--ink-soft); font:600 13px/18px 'DM Sans',sans-serif;
+    cursor:pointer; align-items:center; justify-content:center; margin:0 auto;
+  }
+  body.edit-mode .remove-row-btn{display:inline-flex;}
+  .remove-row-btn:hover{background:#fff; color:var(--bad); border-color:var(--bad);}
+  @media print{.row-actions, .row-actions-th{display:none !important;}}
+  table.tb + .add-card-btn{margin-top:12px;}
+  #tblProdutos td.row-num, #tblDefeitoAvaria td.row-num{text-align:center;}
+
 
   /* ===== Proteção do modo de exibição ===== */
   /* Controles que alteram conteúdo só aparecem após desbloqueio por senha */
@@ -686,17 +704,18 @@
         <h3>Valores em R$ — Devolução vs. Troca por mês</h3>
         <div class="chart-wrap tall"><canvas id="chartTrocas" width="1359" height="387" style="display: block; box-sizing: border-box; height: 310px; width: 1087px;"></canvas></div>
         <table class="tb" style="margin-top:14px;" id="tblTrocas">
-          <thead><tr><th>Mês</th><th>Troca</th><th>Devolução</th><th>Total</th><th>Variação mensal</th></tr></thead>
+          <thead><tr><th>Mês</th><th>Troca</th><th>Devolução</th><th>Total</th><th>Variação mensal</th><th class="row-actions-th"></th></tr></thead>
           <tbody>
-            <tr><td>Jan</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 25.145</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 49.283</td><td>R$&nbsp;74.428,00</td><td>–</td></tr>
-            <tr><td>Fev</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.790</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 40.809</td><td>R$&nbsp;53.599,00</td><td><span class="pill">-28,0%</span></td></tr>
-            <tr><td>Mar</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 27.619</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 39.146</td><td>R$&nbsp;66.765,00</td><td><span class="pill">+24,6%</span></td></tr>
-            <tr><td>Abr</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.775</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 25.231</td><td>R$&nbsp;38.006,00</td><td><span class="pill">-43,1%</span></td></tr>
-            <tr><td>Mai</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 9.803</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 30.240</td><td>R$&nbsp;40.043,00</td><td><span class="pill">+5,4%</span></td></tr>
-            <tr><td>Jun</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.711</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 26.629</td><td>R$&nbsp;39.340,00</td><td><span class="pill">-1,8%</span></td></tr>
-            <tr><td>Jul</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 13.610</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 59.790</td><td>R$&nbsp;73.400,00</td><td><span class="pill">+86,6%</span></td></tr>
+            <tr><td>Jan</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 25.145</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 49.283</td><td>R$&nbsp;74.428,00</td><td>–</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td>Fev</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.790</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 40.809</td><td>R$&nbsp;53.599,00</td><td><span class="pill">-28,0%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td>Mar</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 27.619</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 39.146</td><td>R$&nbsp;66.765,00</td><td><span class="pill">+24,6%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td>Abr</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.775</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 25.231</td><td>R$&nbsp;38.006,00</td><td><span class="pill">-43,1%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td>Mai</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 9.803</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 30.240</td><td>R$&nbsp;40.043,00</td><td><span class="pill">+5,4%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td>Jun</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.711</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 26.629</td><td>R$&nbsp;39.340,00</td><td><span class="pill">-1,8%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td>Jul</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 13.610</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 59.790</td><td>R$&nbsp;73.400,00</td><td><span class="pill">+86,6%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
           </tbody>
         </table>
+        <button type="button" class="add-card-btn" onclick="addMesRow()">+ Adicionar mês</button>
       </div>
     </div>
   </section>
@@ -725,18 +744,32 @@
       </div>
 
       <div class="card">
-        <h3>Produtos mais devolvidos em julho</h3>
+        <h3 contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produtos mais devolvidos em julho</h3>
         <table class="tb" id="tblProdutos">
-          <thead><tr><th style="width:40px;">#</th><th>Produto</th><th style="text-align:right;">Unidades</th></tr></thead>
+          <thead><tr><th style="width:40px; text-align:center;">#</th><th>Produto</th><th style="text-align:center;">Qtde. Devolvida</th><th style="text-align:center;">%</th><th style="text-align:center;">Valor Devolvido</th><th class="row-actions-th"></th></tr></thead>
           <tbody>
-            <tr><td>01</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Copo Fantasia Floresta</td><td contenteditable="true" style="text-align:right;" data-cx-editable="true" data-cx-blur-bound="1">21 un.</td></tr>
-            <tr><td>02</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Prato Raso Entre Rios</td><td contenteditable="true" style="text-align:right;" data-cx-editable="true" data-cx-blur-bound="1">21 un.</td></tr>
-            <tr><td>03</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Xícara de Chá Entre Rios</td><td contenteditable="true" style="text-align:right;" data-cx-editable="true" data-cx-blur-bound="1">14 un.</td></tr>
-            <tr><td>04</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Bowl Entre Rios</td><td contenteditable="true" style="text-align:right;" data-cx-editable="true" data-cx-blur-bound="1">12 un.</td></tr>
-            <tr><td>05</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Jogo Americano Parati Amarelo</td><td contenteditable="true" style="text-align:right;" data-cx-editable="true" data-cx-blur-bound="1">12 un.</td></tr>
+            <tr><td class="row-num">01</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Copo Fantasia Floresta</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">21 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td class="row-num">02</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Prato Raso Entre Rios</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">21 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td class="row-num">03</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Xícara de Chá Entre Rios</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">14 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td class="row-num">04</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Bowl Entre Rios</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">12 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td class="row-num">05</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Jogo Americano Parati Amarelo</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">12 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
           </tbody>
         </table>
+        <button type="button" class="add-card-btn" onclick="addTbRow('tblProdutos')">+ Adicionar produto</button>
         <div class="insight-banner" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1"><b>47 un.</b> — itens da linha Entre Rios concentraram 19% das unidades devolvidas no mês.</div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <h3 contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produtos com mais Defeito e Avaria em julho</h3>
+        <table class="tb" id="tblDefeitoAvaria">
+          <thead><tr><th style="width:40px; text-align:center;">#</th><th>Produto</th><th style="text-align:center;">Qtde. Devolvida</th><th style="text-align:center;">%</th><th style="text-align:center;">Valor Devolvido</th><th class="row-actions-th"></th></tr></thead>
+          <tbody>
+            <tr><td class="row-num">01</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto 1</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">0 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td class="row-num">02</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto 2</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">0 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td class="row-num">03</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Produto 3</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">0 un.</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td><td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td></tr>
+          </tbody>
+        </table>
+        <button type="button" class="add-card-btn" onclick="addTbRow('tblDefeitoAvaria')">+ Adicionar produto</button>
       </div>
     </div>
   </section>
@@ -1465,6 +1498,57 @@
     }, true);
     updateTrocasFromTable();
   })();
+
+  // Tabela "Produtos mais devolvidos" / "Defeito e Avaria": incluir e remover linhas
+  function renumberTbRows(tbody){
+    tbody.querySelectorAll('tr').forEach((tr, i) => {
+      const numCell = tr.querySelector('td.row-num');
+      if(numCell) numCell.textContent = String(i + 1).padStart(2, '0');
+    });
+  }
+  function addTbRow(tableId){
+    const table = document.getElementById(tableId);
+    if(!table) return;
+    const tbody = table.tBodies[0];
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td class="row-num"></td>' +
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Novo produto</td>' +
+      '<td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">0 un.</td>' +
+      '<td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">—</td>' +
+      '<td contenteditable="true" style="text-align:center;" data-cx-editable="true" data-cx-blur-bound="1">R$ 0,00</td>' +
+      '<td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeTbRow(this)" title="Excluir linha">×</button></td>';
+    tbody.appendChild(tr);
+    renumberTbRows(tbody);
+  }
+  function removeTbRow(btn){
+    const tr = btn.closest('tr');
+    const tbody = tr.parentElement;
+    tr.remove();
+    renumberTbRows(tbody);
+  }
+
+  // Tabela "Devolução vs. Troca por mês": incluir e remover meses (totais e gráfico recalculam automaticamente)
+  function addMesRow(){
+    const table = document.getElementById('tblTrocas');
+    if(!table) return;
+    const tbody = table.tBodies[0];
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Novo mês</td>' +
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 0</td>' +
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">R$ 0</td>' +
+      '<td>R$ 0,00</td>' +
+      '<td>–</td>' +
+      '<td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td>';
+    tbody.appendChild(tr);
+    updateTrocasFromTable();
+  }
+  function removeMesRow(btn){
+    const tr = btn.closest('tr');
+    tr.remove();
+    updateTrocasFromTable();
+  }
 
   // Garante renderização dos gráficos ao abrir/navegar, inclusive após mudança de tamanho da janela
   function refreshAllVisibleCharts(){
