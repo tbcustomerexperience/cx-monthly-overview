@@ -34,15 +34,15 @@
 </script>
 <style>
   :root{
-    --green:#2C4F3A; --green-deep:#1f3a2a; --gold:#B89A5E;
+    --green:#2C4F3A; --green-deep:#1f3a2a; --green-cover:#668E56; --gold:#B89A5E;
     --cream:#F7F4EC; --sand:#EDE6D6; --sand-dark:#E2D9C4; --paper:#FBFAF6;
     --ink:#33352F; --ink-soft:#6b6d64; --line:#DED5C0;
     --ok:#4C7A5B; --warn:#C08A3E; --bad:#B4553F;
     --shadow: 0 1px 3px rgba(44,79,58,.06), 0 8px 24px -12px rgba(44,79,58,.12);
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:var(--green-deep);}
-  body{background:var(--green-deep); color:var(--ink); font-family:'DM Sans',sans-serif; overflow:hidden;}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:var(--green-cover);}
+  body{background:var(--green-cover); color:var(--ink); font-family:'DM Sans',sans-serif; overflow:hidden;}
   h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;}
 
   /* ===== deck shell ===== */
@@ -60,7 +60,7 @@
   .slide-sub{font-size:13px; color:var(--ink-soft); margin-bottom:26px;}
 
   /* ===== cover slide ===== */
-  .cover{background:linear-gradient(150deg, var(--green) 0%, var(--green-deep) 100%); color:#f2efe6; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden;}
+  .cover{background:linear-gradient(150deg, #7C9D6D 0%, var(--green-cover) 100%); color:#f2efe6; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden;}
   .cover::after{content:"";position:absolute; right:-80px; top:-80px; width:320px; height:320px; border:1px solid rgba(242,239,230,.14); border-radius:50%;}
   .cover::before{content:"";position:absolute; left:-100px; bottom:-120px; width:280px; height:280px; border:1px solid rgba(242,239,230,.1); border-radius:50%;}
   .cover .leaf{width:26px;height:26px;opacity:.85; margin-bottom:18px;}
@@ -68,7 +68,7 @@
   .cover h1{font-size:56px; font-weight:500; margin:0 0 10px; color:#fbfaf4;}
   .cover .period{font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#cfd8cd; border:1px solid rgba(242,239,230,.35); border-radius:100px; padding:8px 22px; display:inline-block; margin-top:14px;}
 
-  .closing{background:linear-gradient(150deg, var(--green) 0%, var(--green-deep) 100%); align-items:center; justify-content:center; text-align:center;}
+  .closing{background:linear-gradient(150deg, #7C9D6D 0%, var(--green-cover) 100%); align-items:center; justify-content:center; text-align:center;}
   .closing h1{font-size:64px; font-style:italic; color:#f2efe6; font-weight:400;}
   .art-slide{padding:0; background:#F4EAE3;}
   .art-slide img{width:100%; height:100%; object-fit:cover; display:block;}
@@ -210,7 +210,7 @@
 
   /* ===== controls ===== */
   #controls{
-    position:fixed; bottom:0; left:0; right:0; height:56px; background:var(--green-deep);
+    position:fixed; bottom:0; left:0; right:0; height:56px; background:var(--green-cover);
     display:flex; align-items:center; justify-content:space-between; padding:0 24px; z-index:50;
     font-size:12.5px; color:#cfd8cd;
   }
@@ -518,9 +518,107 @@
 #aconteceuGrid {
   align-items: stretch !important;
 }
+
+  /* Padronização solicitada: cards de Publicações em Destaque e Aconteceu nas Redes
+     com a mesma dimensão e proporção dos Destaques de Engajamento nas Redes */
+  #publicacoesGrid, #aconteceuGrid{align-items:stretch;}
+  #publicacoesGrid > .card, #aconteceuGrid > .card{height:420px !important;}
+  #publicacoesGrid .photo-slot.portrait, #aconteceuGrid .photo-slot.portrait{height:260px !important; min-height:260px !important;}
 </style>
-<meta id="bbafmabaelnnkondpfpjmdklbmfnbmol"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"><meta id="bbafmabaelnnkondpfpjmdklbmfnbmol"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
+<meta id="bbafmabaelnnkondpfpjmdklbmfnbmol"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"><meta id="bbafmabaelnnkondpfpjmdklbmfnbmol"><meta id="dcngeagmmhegagicpcmpinaoklddcgon">
+<style id="exact-card-proportion-adjustment">
+/* Ajuste exclusivo de dimensão, igualando Publicações em Destaque e Aconteceu nas Redes
+   à proporção dos cards de Destaques de Engajamento nas Redes, página 8. */
+#publicacoesGrid,
+#aconteceuGrid {
+  grid-template-columns: repeat(3, 275px) !important;
+  justify-content: start !important;
+  align-items: stretch !important;
+}
+
+#publicacoesGrid > .card,
+#aconteceuGrid > .card {
+  width: 275px !important;
+  min-width: 275px !important;
+  max-width: 275px !important;
+  height: 420px !important;
+  box-sizing: border-box !important;
+  padding: 18px 20px !important;
+}
+
+#publicacoesGrid .photo-slot.portrait,
+#aconteceuGrid .photo-slot.portrait {
+  width: 235px !important;
+  height: 260px !important;
+  min-height: 260px !important;
+  max-height: 260px !important;
+  margin: 0 auto 12px !important;
+}
+</style>
+
+<style id="left-nav-menu">
+  :root{ --nav-w:236px; }
+
+  #sideNav{
+    position:fixed; top:0; left:0; bottom:0; width:var(--nav-w); z-index:60;
+    background:var(--green-cover); border-right:1px solid rgba(242,239,230,.12);
+    display:flex; flex-direction:column; transition:transform .3s ease;
+  }
+  #sideNav .nav-head{padding:26px 22px 16px; border-bottom:1px solid rgba(242,239,230,.12);}
+  #sideNav .nav-head .eyebrow{color:var(--gold);}
+  #sideNav .nav-head .nav-title{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500;
+    font-size:19px; color:#F7F4EC; margin-top:4px; line-height:1.25;
+  }
+  #navList{list-style:none; margin:0; padding:10px 0; flex:1; overflow-y:auto;}
+  #navList li{margin:0;}
+  #navList button{
+    width:100%; text-align:left; appearance:none; border:none; background:transparent;
+    color:#cfd8cd; font-family:'DM Sans',sans-serif; font-size:12.5px; font-weight:600;
+    padding:11px 22px; cursor:pointer; display:flex; align-items:baseline; gap:10px;
+    border-left:3px solid transparent; transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  #navList button .n{color:rgba(242,239,230,.45); font-variant-numeric:tabular-nums; font-size:11px; min-width:16px;}
+  #navList button .t{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  #navList button:hover{background:rgba(242,239,230,.06); color:#F7F4EC;}
+  #navList li.active button{background:rgba(184,154,94,.14); color:#F7F4EC; border-left-color:var(--gold);}
+  #navList li.active button .n{color:var(--gold);}
+
+  #navToggle{
+    position:fixed; top:14px; left:14px; z-index:70; display:none;
+    width:38px; height:38px; border-radius:8px; border:1px solid rgba(242,239,230,.3);
+    background:var(--green-cover); color:#efeada; cursor:pointer; font-size:16px;
+    align-items:center; justify-content:center;
+  }
+
+  #deck{left:var(--nav-w);}
+  #controls{left:var(--nav-w);}
+
+  @media (max-width: 980px){
+    #sideNav{transform:translateX(-100%); box-shadow:0 0 40px rgba(0,0,0,.35);}
+    body.nav-open #sideNav{transform:translateX(0);}
+    #navToggle{display:flex;}
+    #deck{left:0;}
+    #controls{left:0;}
+  }
+
+  @media print{
+    #sideNav, #navToggle{display:none !important;}
+    #deck, #controls{left:0 !important;}
+  }
+</style>
+</head>
 <body class="edit-mode">
+
+<button id="navToggle" type="button" aria-label="Abrir menu de navegação">☰</button>
+
+<nav id="sideNav" aria-label="Navegação entre páginas">
+  <div class="nav-head">
+    <div class="eyebrow">TANIA BULHÕES · CX</div>
+    <div class="nav-title">Overview — Julho 2026</div>
+  </div>
+  <ul id="navList"></ul>
+</nav>
 
 <div id="deck">
 
@@ -533,7 +631,7 @@
   <section class="slide" data-slide="2">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Painel de Indicadores Operacionais</h2>
+      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Indicadores Operacionais</h2>
       <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Julho 2026</div>
 
       <div class="kpi-row n4">
@@ -576,7 +674,7 @@
   <section class="slide" data-slide="3">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Indicadores de Satisfação e Experiência do Cliente</h2>
+      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Satisfação do Cliente</h2>
       <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Acumulado 2026</div>
 
       <div class="kpi-row">
@@ -754,7 +852,7 @@
   <section class="slide" data-slide="6">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Trocas &amp; Devoluções — Motivos</h2>
+      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Análise de Trocas &amp; Devoluções</h2>
       <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Acumulado Janeiro – Julho 2026</div>
 
       <div class="grid-2" style="margin-bottom:18px;">
@@ -815,7 +913,7 @@
   <section class="slide" data-slide="7">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Presença Digital — Métricas Proprietárias</h2>
+      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Métricas Proprietárias</h2>
       <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Perfil: Tania Bulhões</div>
 
       <div class="kpi-row n4" style="margin-bottom:18px;">
@@ -1012,6 +1110,7 @@
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dotsEl = document.getElementById('dots');
   const labelEl = document.getElementById('slideLabel');
+  const navListEl = document.getElementById('navList');
   let current = 0;
 
   // Garante que somente um slide esteja ativo ao abrir a apresentação.
@@ -1023,6 +1122,49 @@
     const d = document.createElement('span');
     d.addEventListener('click', () => goTo(i));
     dotsEl.appendChild(d);
+  });
+
+  // Menu lateral: um item por página, com o título de cada slide.
+  function slideNavLabel(slide, i){
+    const titleEl = slide.querySelector('.slide-title');
+    if(titleEl && titleEl.textContent.trim()) return titleEl.textContent.trim();
+    if(slide.classList.contains('cover-slide')) return 'Capa';
+    if(slide.classList.contains('closing')) return 'Encerramento';
+    const h = slide.querySelector('h1,h2');
+    if(h && h.textContent.trim()) return h.textContent.trim();
+    return 'Página ' + (i + 1);
+  }
+  navListEl.innerHTML = '';
+  slides.forEach((slide, i) => {
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.innerHTML = '<span class="n">' + String(i + 1).padStart(2, '0') + '</span><span class="t"></span>';
+    btn.querySelector('.t').textContent = slideNavLabel(slide, i);
+    btn.addEventListener('click', () => {
+      goTo(i);
+      document.body.classList.remove('nav-open');
+    });
+    li.appendChild(btn);
+    navListEl.appendChild(li);
+  });
+
+  // Mantém o rótulo do menu sincronizado enquanto o título do slide é editado.
+  document.querySelectorAll('.slide-title').forEach(titleEl => {
+    titleEl.addEventListener('input', () => {
+      const i = slides.indexOf(titleEl.closest('.slide'));
+      const t = navListEl.children[i] && navListEl.children[i].querySelector('.t');
+      if(t) t.textContent = titleEl.textContent.trim() || ('Página ' + (i + 1));
+    });
+  });
+
+  // Toggle do menu em telas estreitas.
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => document.body.classList.toggle('nav-open'));
+  document.addEventListener('click', e => {
+    if(!document.body.classList.contains('nav-open')) return;
+    if(e.target.closest('#sideNav') || e.target.closest('#navToggle')) return;
+    document.body.classList.remove('nav-open');
   });
 
   function refreshChartsInSlide(slide){
@@ -1047,6 +1189,9 @@
     slides[current].classList.add('active');
     dotsEl.querySelectorAll('span').forEach((d, idx) => d.classList.toggle('active', idx === current));
     labelEl.textContent = (current + 1) + ' / ' + slides.length;
+    Array.from(navListEl.children).forEach((li, idx) => li.classList.toggle('active', idx === current));
+    const activeLi = navListEl.children[current];
+    if(activeLi) activeLi.scrollIntoView({block:'nearest'});
     refreshChartsInSlide(slides[current]);
   }
   goTo(0);
