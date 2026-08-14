@@ -621,7 +621,7 @@
     <div class="eyebrow">TANIA BULHÕES · CX</div>
     <div class="nav-title">Overview — Julho 2026</div>
   </div>
-  <ul id="navList"><li class="active"><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li class=""><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li class=""><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li class=""><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li class=""><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li class=""><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li class=""><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li class=""><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
+  <ul id="navList"><li class="active"><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
 </nav>
 
 <div id="deck">
@@ -649,7 +649,7 @@
 
       <div class="grid-2">
         <div class="card">
-          <h3 contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Principais motivos de contato</h3>
+          <h3>Principais motivos de contato</h3>
           <div class="chart-wrap"><canvas id="chartMotivos" style="display: block; box-sizing: border-box; width: 509px; height: 210px;" width="637" height="262"></canvas></div>
           <div class="donut-editor" data-chart="chartMotivos">
             <div class="donut-editor-row"><span class="donut-swatch" style="background:#2C4F3A;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Outros Temas (42)</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">59</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
@@ -661,7 +661,7 @@
           </div>
         </div>
         <div class="card">
-          <h3 contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Principais problemas relatados</h3>
+          <h3>Principais problemas relatados</h3>
           <div class="chart-wrap"><canvas id="chartProblemas" style="display: block; box-sizing: border-box; width: 509px; height: 210px;" width="637" height="262"></canvas></div>
           <div class="donut-editor" data-chart="chartProblemas">
             <div class="donut-editor-row"><span class="donut-swatch" style="background:#2C4F3A;"></span><span class="donut-label" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Problemas na Entrega</span><span class="donut-value" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">46,2</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
@@ -1130,7 +1130,7 @@
     <button id="nextBtn">Próximo →</button>
     <span id="slideLabel">1 / 10</span>
   </div>
-  <div id="dots"><span class="active"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+  <div id="dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="right">
     <span id="saveNote" class="">alterações salvas</span>
     <span id="ghSyncNote" class="busy">GitHub: salvando…</span>
@@ -1140,7 +1140,7 @@
   </div>
 </div>
 
-<div id="ghOverlay">
+<div id="ghOverlay" class="show">
   <div id="ghPanel">
     <h4>Publicar no GitHub</h4>
     <p class="hint">Configure uma vez. O token e os dados ficam salvos apenas neste navegador e são usados só para chamar a API do GitHub.</p>
