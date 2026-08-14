@@ -58,6 +58,10 @@
   .eyebrow{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:700;}
   .slide-title{font-size:32px; font-weight:500; color:var(--green-deep); margin:6px 0 2px;}
   .slide-sub{font-size:13px; color:var(--ink-soft); margin-bottom:26px;}
+  .slide-header-row{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin:6px 0 26px;}
+  .slide-header-row .slide-title{margin:0;}
+  .slide-header-row .slide-sub{margin:0 0 0 auto; background:var(--green); color:#fff; font-weight:400; padding:4px 14px; border-radius:100px; white-space:nowrap;}
+  @media (max-width:720px){ .slide-header-row .slide-sub{white-space:normal;} }
 
   /* ===== cover slide ===== */
   .cover{background:linear-gradient(150deg, #7C9D6D 0%, var(--green-cover) 100%); color:#f2efe6; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden;}
@@ -617,13 +621,13 @@
     <div class="eyebrow">TANIA BULHÕES · CX</div>
     <div class="nav-title">Overview — Julho 2026</div>
   </div>
-  <ul id="navList"><li class=""><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li class=""><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li class=""><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li class=""><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li class=""><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li class="active"><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li class=""><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li class=""><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li class=""><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
+  <ul id="navList"><li class="active"><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li class=""><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li class=""><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li class=""><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li class=""><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li class=""><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li class=""><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li class=""><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
 </nav>
 
 <div id="deck">
 
   <!-- SLIDE 1 — CAPA -->
-  <section class="slide cover-slide" data-slide="1">
+  <section class="slide cover-slide active" data-slide="1">
     <div class="cover-image" role="img" aria-label="Overview Customer Experience Tania Bulhões"></div>
   </section>
 
@@ -631,8 +635,10 @@
   <section class="slide" data-slide="2">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Indicadores Operacionais</h2>
-      <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Julho 2026</div>
+      <div class="slide-header-row">
+        <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Indicadores Operacionais</h2>
+        <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Julho 2026</div>
+      </div>
 
       <div class="kpi-row n4">
         <div class="kpi-card"><div class="lbl" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">Contatos Recebidos</div><div class="val" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">1.139</div></div>
@@ -667,15 +673,61 @@
         </div>
       </div>
       <div class="insight-banner" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1"><b>Problemas </b>representa&nbsp;<b>11%&nbsp;</b>do total de contatos. Dentro desse volume&nbsp;<font color="#1f3a2a"><b>46,2%</b></font>&nbsp;estão relacionados a <font color="#1f3a2a"><b>atrasos na entrega</b></font>, seguidos por defeito de produto, com&nbsp;<b style="color: rgb(31, 58, 42);">24,7% </b>e <b style="color: rgb(31, 58, 42);">14,%&nbsp;</b>produto com avaria.</div>
+
+      <div class="card" style="margin-top:18px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:14px;">
+          <h3 style="margin:0;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Evolução dos Contatos sobre Problemas na Entrega</h3>
+          <div style="border:1px solid var(--line); border-radius:100px; padding:6px 16px; font-size:11px; color:var(--ink-soft); font-weight:600; letter-spacing:.02em; flex-shrink:0;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Jan a Ago 2026</div>
+        </div>
+
+        <table class="tb" id="tblEntrega">
+          <thead><tr><th>Mês</th><th>Contatos classificados como problema</th><th>% do total de contatos</th><th>Contatos sobre problemas na entrega</th><th>% dentro dos contatos de problema</th><th class="row-actions-th"></th></tr></thead>
+          <tbody>
+            <tr><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Jan</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">338</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">24%</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">89</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">26%</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Fev</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">184</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">13%</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">48</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">26%</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Mar</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">164</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">12%</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">42</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">26%</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Abr</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">95</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">8%</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">37</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">39%</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Mai</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">93</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">7%</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">29</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">31%</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Jun</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">92</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">8%</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">46</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">50%</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Jul</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">129</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">10%</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">55</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">43%</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr style="background:var(--sand);"><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:700;">Ago*</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:700;">119</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:700;">19%</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">78</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:700;">66%</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td></tr>
+          </tbody>
+        </table>
+        <button type="button" class="add-card-btn" onclick="addEntregaRow()">+ Adicionar mês</button>
+
+        <div class="kpi-row" style="grid-template-columns:repeat(3,1fr); margin-top:18px;">
+          <div class="kpi-card" style="text-align:left; align-items:flex-start;">
+            <div class="lbl" style="justify-content:flex-start;" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">Contatos sobre entrega em agosto</div>
+            <div class="val" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">78</div>
+            <div style="font-size:11px; color:var(--ink-soft);" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Maior volume desde fevereiro.</div>
+          </div>
+          <div class="kpi-card" style="text-align:left; align-items:flex-start;">
+            <div class="lbl" style="justify-content:flex-start;" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">Variação vs. Julho</div>
+            <div class="val" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">+41,8%</div>
+            <div style="font-size:11px; color:var(--ink-soft);" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">De 55 para 78 contatos relacionados a problemas na entrega.</div>
+          </div>
+          <div class="kpi-card" style="text-align:left; align-items:flex-start;">
+            <div class="lbl" style="justify-content:flex-start;" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">Concentração em Agosto</div>
+            <div class="val" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">66%</div>
+            <div style="font-size:11px; color:var(--ink-soft);" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Dos contatos classificados como problema estão ligados à entrega.</div>
+          </div>
+        </div>
+
+        <div class="insight-banner" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1"><b>Leitura: </b>embora o total de contatos classificados como problema tenha passado de 129 em julho para 119 em agosto, os contatos relacionados a problemas na entrega aumentaram de <b>55 para 78</b>. Isso mostra uma maior concentração do tema dentro das manifestações de problema. <b>Importante:</b> os números representam contatos realizados pelos clientes, e não ocorrências ou reclamações únicas.</div>
+
+        <div style="font-size:11px; color:var(--ink-soft); margin-top:10px;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">* Agosto parcial. A mesma situação pode gerar mais de um contato do cliente, portanto o volume não deve ser interpretado como quantidade real de pedidos ou ocorrências com problema.</div>
+      </div>
     </div>
   </section>
 
-  <!-- SLIDE 2 — SATISFAÇÃO -->
+  <!-- SLIDE 3 — SATISFAÇÃO -->
   <section class="slide" data-slide="3">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Satisfação do Cliente</h2>
-      <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Acumulado 2026</div>
+      <div class="slide-header-row">
+        <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Satisfação do Cliente</h2>
+        <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Acumulado 2026</div>
+      </div>
 
       <div class="kpi-row">
         <div class="kpi-card"><div class="lbl" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true">Resultado do Mês</div><div class="val" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">93%</div></div>
@@ -692,12 +744,14 @@
     </div>
   </section>
 
-  <!-- SLIDE 3 — RECLAME AQUI -->
+  <!-- SLIDE 4 — RECLAME AQUI -->
   <section class="slide" data-slide="4">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Reclame Aqui</h2>
-      <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Reputação nos últimos 6 meses</div>
+      <div class="slide-header-row">
+        <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Reclame Aqui</h2>
+        <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Reputação nos últimos 6 meses</div>
+      </div>
 
       <div class="kpi-row">
         <div class="kpi-card"><div class="lbl" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="true"><span class="badge-otimo" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">ÓTIMO</span>Nota Geral</div><div class="val" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">8,3<span style="font-size:15px;color:var(--ink-soft);font-family:'DM Sans',sans-serif;">/10</span></div></div>
@@ -802,8 +856,10 @@
   <section class="slide" data-slide="5">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Trocas &amp; Devoluções</h2>
-      <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Acumulado Janeiro – Julho 2026</div>
+      <div class="slide-header-row">
+        <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Trocas &amp; Devoluções</h2>
+        <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Acumulado Janeiro – Julho 2026</div>
+      </div>
 
       <div class="kpi-row" style="grid-template-columns:1.35fr 1fr 1fr 1fr; margin-bottom:20px;">
         <div class="kpi-card" style="border-left-color:var(--bad);">
@@ -849,11 +905,13 @@
   </section>
 
   <!-- SLIDE 5 — TROCAS & DEVOLUÇÕES MOTIVOS -->
-  <section class="slide active" data-slide="6">
+  <section class="slide" data-slide="6">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Análise de Trocas &amp; Devoluções</h2>
-      <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Acumulado Janeiro – Julho 2026</div>
+      <div class="slide-header-row">
+        <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Análise de Trocas &amp; Devoluções</h2>
+        <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Acumulado Janeiro – Julho 2026</div>
+      </div>
 
       <div class="grid-2" style="margin-bottom:18px;">
         <div class="card stat-highlight">
@@ -913,8 +971,10 @@
   <section class="slide" data-slide="7">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
-      <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Métricas Proprietárias</h2>
-      <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Perfil: Tania Bulhões</div>
+      <div class="slide-header-row">
+        <h2 class="slide-title" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Métricas Proprietárias</h2>
+        <div class="slide-sub" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Perfil: Tania Bulhões</div>
+      </div>
 
       <div class="kpi-row n4" style="margin-bottom:18px;">
         <div class="kpi-card"><div class="lbl" contenteditable="true" data-edit-key="presence-followers-label" data-cx-editable="true" data-cx-blur-bound="1">Seguidores</div><div class="val" contenteditable="true" data-edit-key="presence-followers-value" data-cx-editable="true" data-cx-blur-bound="1">866 mil</div><div class="delta up" contenteditable="true" data-edit-key="presence-followers-delta" data-cx-editable="true" data-cx-blur-bound="1">▲ 3.401</div></div>
@@ -1068,9 +1128,9 @@
   <div class="left">
     <button id="prevBtn">← Anterior</button>
     <button id="nextBtn">Próximo →</button>
-    <span id="slideLabel">6 / 10</span>
+    <span id="slideLabel">1 / 10</span>
   </div>
-  <div id="dots"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="active"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+  <div id="dots"><span class="active"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
   <div class="right">
     <span id="saveNote" class="">alterações salvas</span>
     <span id="ghSyncNote" class="busy">GitHub: salvando…</span>
@@ -1080,7 +1140,7 @@
   </div>
 </div>
 
-<div id="ghOverlay" class="show">
+<div id="ghOverlay">
   <div id="ghPanel">
     <h4>Publicar no GitHub</h4>
     <p class="hint">Configure uma vez. O token e os dados ficam salvos apenas neste navegador e são usados só para chamar a API do GitHub.</p>
@@ -1819,6 +1879,26 @@
     const tr = btn.closest('tr');
     tr.remove();
     updateTrocasFromTable();
+  }
+
+  // Tabela "Evolução dos Contatos sobre Problemas na Entrega": incluir e remover meses
+  function addEntregaRow(){
+    const table = document.getElementById('tblEntrega');
+    if(!table) return;
+    const tbody = table.tBodies[0];
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Novo mês</td>' +
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">0</td>' +
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">0%</td>' +
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">0</td>' +
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">0%</td>' +
+      '<td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td>';
+    tbody.appendChild(tr);
+  }
+  function removeEntregaRow(btn){
+    const tr = btn.closest('tr');
+    tr.remove();
   }
 
   // Garante renderização dos gráficos ao abrir/navegar, inclusive após mudança de tamanho da janela
