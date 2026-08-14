@@ -128,6 +128,9 @@
   .note-box:focus{color:var(--ink); background:#fff;}
   [contenteditable="true"].note-box:empty::before{content:attr(data-placeholder); color:var(--ink-soft); opacity:.7;}
   .card{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:22px 24px; box-shadow:var(--shadow); max-width:100%; overflow-x:auto;}
+  .collapsible-toggle .collapsible-chevron{font-size:22px; line-height:1; color:var(--ink-soft); transition:transform .2s ease; flex-shrink:0; margin-left:12px;}
+  .collapsible-toggle[aria-expanded="false"] .collapsible-chevron{transform:rotate(-90deg);}
+  .collapsible-toggle[aria-expanded="false"] + .collapsible-body{display:none;}
   .card h3{font-size:16px; font-weight:500; color:var(--green-deep); margin:0 0 14px;}
   .card h3 .tag{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin-left:8px; font-family:'DM Sans',sans-serif; font-style:normal;}
   .section-label{font-size:16px; font-weight:500; color:var(--green-deep); margin:0 0 14px; font-family:'Cormorant Garamond',serif;}
@@ -611,6 +614,100 @@
     #sideNav, #navToggle{display:none !important;}
     #deck, #controls{left:0 !important;}
   }
+
+
+  /* ===== Ajuste tipográfico solicitado ===== */
+  /* Mantém os títulos principais da apresentação com a tipografia atual. */
+  .slide-title{
+    font-family:'Cormorant Garamond',serif !important;
+    font-style:italic !important;
+    font-weight:500 !important;
+  }
+
+  /* Mantém os números dos cards no estilo original da referência. */
+  .kpi-card .val,
+  .stat-highlight .num,
+  .bar-row-val{
+    font-family:'Cormorant Garamond',serif !important;
+    font-style:italic !important;
+    font-weight:500 !important;
+    color:#3D3F39 !important;
+    letter-spacing:-.015em !important;
+  }
+  .kpi-card .val{font-size:36px !important; line-height:1 !important;}
+  .stat-highlight .num{font-size:46px !important;}
+  .bar-row-val{font-size:22px !important;}
+  .rank-list .n{
+    font-family:'Aptos','Segoe UI',Arial,sans-serif !important;
+  }
+
+  /* Demais textos recebem uma fonte mais leve e limpa. */
+  body,
+  .slide-sub,
+  .eyebrow,
+  .kpi-card .lbl,
+  .kpi-card .delta,
+  .card,
+  .card p,
+  .card li,
+  .card td,
+  .card th,
+  .note-box,
+  .insight-banner,
+  .donut-editor-row,
+  .photo-caption,
+  .post-card,
+  .handle-tag,
+  .pill,
+  button,
+  input,
+  textarea,
+  select{
+    font-family:'Aptos','Segoe UI',Arial,sans-serif !important;
+  }
+
+  /* Títulos internos dos cards ficam elegantes, mas sem competir com o título principal. */
+  .card h3,
+  .section-label{
+    font-family:'Aptos','Segoe UI',Arial,sans-serif !important;
+    font-style:normal !important;
+    font-weight:500 !important;
+    letter-spacing:-.01em;
+  }
+
+  /* Cabeçalhos das tabelas, mais leves e suaves, conforme a referência. */
+  table.tb th{
+    font-family:'Aptos','Segoe UI',Arial,sans-serif !important;
+    font-weight:500 !important;
+    font-size:10.5px !important;
+    letter-spacing:.045em !important;
+    color:#405044 !important;
+  }
+
+  table.tb td{
+    font-weight:400;
+    color:#4b4e47;
+  }
+
+
+  /* Centralização da tabela de evolução dos contatos sobre entrega. */
+  #tblEntrega th:not(.row-actions-th),
+  #tblEntrega td:not(.row-actions){
+    text-align:center !important;
+    vertical-align:middle !important;
+  }
+
+  /* Rótulos e textos auxiliares com menos peso visual. */
+  .kpi-card .lbl,
+  .eyebrow,
+  .slide-sub,
+  .donut-label,
+  .donut-value,
+  .photo-caption,
+  .post-card .meta-row div{
+    font-weight:400 !important;
+  }
+
 </style>
 </head>
 <body class="edit-mode">
@@ -676,7 +773,11 @@
       <div class="insight-banner" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1"><b>Problemas </b>representa&nbsp;<b>12%&nbsp;</b>do total de contatos. Dentro desse volume&nbsp;<font color="#1f3a2a"><b>43%</b></font>&nbsp;estão relacionados a <font color="#1f3a2a"><b>atrasos na entrega</b></font>, seguidos por defeito de produto, com&nbsp;<b style="color: rgb(31, 58, 42);">23% </b>e <b style="color: rgb(31, 58, 42);">12%&nbsp;</b>produto com avaria.</div>
 
       <div class="card" style="margin-top:18px;">
-        <h3 style="margin:0 0 10px;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Glossário — Tipos de contato</h3>
+        <button type="button" class="collapsible-toggle" onclick="toggleCollapsible(this)" aria-expanded="false" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:none; border:none; padding:0; margin:0 0 10px; cursor:pointer; font:inherit; text-align:left;">
+          <h3 style="margin:0;" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Glossário — Tipos de contato</h3>
+          <span class="collapsible-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="collapsible-body">
         <table class="tb" id="tblGlossarioContato">
           <thead><tr><th style="width:160px;">Tipo de contato</th><th>O que representa</th></tr></thead>
           <tbody>
@@ -687,6 +788,7 @@
             <tr><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:700;">Outros</td><td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Contatos que não se enquadram nas categorias anteriores ou não tiveram interação efetiva, como engano ou contato sem interação.</td></tr>
           </tbody>
         </table>
+        </div>
       </div>
 
       <div class="card" style="margin-top:18px;">
@@ -1625,7 +1727,7 @@
   // ===== charts — paleta Tania Bulhões (verde + dourado) =====
   const GREEN = '#2C4F3A', GREEN_DEEP = '#1f3a2a', GOLD = '#B89A5E', GOLD_LIGHT = '#D9C79A', SAGE = '#6B8F76', OLIVE = '#8C8266';
   Chart.register(ChartDataLabels);
-  Chart.defaults.font.family = "'DM Sans', sans-serif";
+  Chart.defaults.font.family = "'Aptos', 'Segoe UI', Arial, sans-serif";
   Chart.defaults.color = '#6b6d64';
 
   const donutCharts = {};
@@ -1699,11 +1801,37 @@
   }
   (function initDonutEditors(){
     document.querySelectorAll('.donut-editor').forEach(editor => {
+      const canvasId = editor.getAttribute('data-chart');
+      let updateFrame = null;
+      const scheduleUpdate = () => {
+        if(updateFrame) cancelAnimationFrame(updateFrame);
+        updateFrame = requestAnimationFrame(() => {
+          updateFrame = null;
+          updateDonutFromEditor(canvasId);
+        });
+      };
+
+      // Mantém o gráfico sincronizado com os dados visíveis no editor,
+      // inclusive para novas fatias, valores restaurados e alterações de texto.
       editor.addEventListener('input', e => {
         if(e.target && (e.target.classList.contains('donut-label') || e.target.classList.contains('donut-value'))){
-          updateDonutFromEditor(editor.getAttribute('data-chart'));
+          scheduleUpdate();
         }
       });
+      editor.addEventListener('blur', e => {
+        if(e.target && (e.target.classList.contains('donut-label') || e.target.classList.contains('donut-value'))){
+          scheduleUpdate();
+        }
+      }, true);
+
+      const observer = new MutationObserver(mutations => {
+        if(mutations.some(m => m.type === 'childList' || m.type === 'characterData')) scheduleUpdate();
+      });
+      observer.observe(editor, { childList:true, subtree:true, characterData:true });
+
+      // Na abertura da apresentação, o gráfico passa a usar o conteúdo atual do editor,
+      // em vez dos valores fixos definidos apenas como carga inicial.
+      scheduleUpdate();
     });
   })();
 
@@ -1741,10 +1869,10 @@
         { label:'Troca', data:[25145.65,12790.70,27619.15,12775,9803.08,12711,13610], backgroundColor:'#D9C79A', stack:'s', borderRadius:3 }
       ]},
     options:{ maintainAspectRatio:false,
-      scales:{ x:{ grid:{ display:false }, stacked:true }, y:{ stacked:true, ticks:{ color:'#6F716B', font:{ family:"'Cormorant Garamond', Georgia, serif", style:'normal', weight:400, size:10 }, callback:v=>'R$ '+(v/1000)+'k' }, grid:{ color:'#EDE6D6' } } },
+      scales:{ x:{ grid:{ display:false }, stacked:true }, y:{ stacked:true, ticks:{ color:'#6F716B', font:{ family:"'Aptos', 'Segoe UI', Arial, sans-serif", style:'normal', weight:400, size:10 }, callback:v=>'R$ '+(v/1000)+'k' }, grid:{ color:'#EDE6D6' } } },
       plugins:{
         legend:{ display:true, position:'top', align:'center', labels:{ boxWidth:11, boxHeight:11, padding:16, usePointStyle:false, font:{ size:12, weight:600 } } },
-        datalabels:{ color:'#FFFFFF', font:{ family:"'DM Sans', sans-serif", style:'normal', weight:500, size:10 }, formatter:v=>'R$ '+(v/1000).toFixed(0)+'k' } } }
+        datalabels:{ color:'#FFFFFF', font:{ family:"'Aptos', 'Segoe UI', Arial, sans-serif", style:'normal', weight:500, size:10 }, formatter:v=>'R$ '+(v/1000).toFixed(0)+'k' } } }
   });
 
 
@@ -1917,6 +2045,12 @@
     const tr = btn.closest('tr');
     tr.remove();
     recalcEntregaTable();
+  }
+
+  // Seções recolhíveis (ex.: Glossário) — alterna exibição do corpo abaixo do botão de título
+  function toggleCollapsible(btn){
+    const expanded = btn.getAttribute('aria-expanded') !== 'false';
+    btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   }
   function recalcEntregaTable(){
     const table = document.getElementById('tblEntrega');
