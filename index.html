@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overview CX · Tania Bulhões</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#2C4F3A;
+    --green-dark:#1F3A2A;
+    --gold:#B89A5E;
+    --cream:#FAF7F1;
+    --text:#2C2C2C;
+    --rail-w:64px;
+    --rail-w-open:212px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'DM Sans', sans-serif;
+    background:var(--cream);
+    color:var(--text);
+    min-height:100vh;
+  }
+
+  /* ===== MENU LATERAL DISCRETO ===== */
+  .rail{
+    position:fixed;
+    top:0; left:0;
+    height:100vh;
+    width:var(--rail-w);
+    background:var(--green-dark);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding:28px 0;
+    overflow:hidden;
+    transition:width 0.28s cubic-bezier(.4,0,.2,1);
+    z-index:100;
+  }
+  .rail:hover{width:var(--rail-w-open);}
+
+  .rail-brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    padding:0 20px 26px;
+    margin-bottom:10px;
+    border-bottom:1px solid rgba(184,154,94,0.22);
+  }
+  .rail-brand .mark{
+    width:22px;height:22px;
+    flex:0 0 auto;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    position:relative;
+  }
+  .rail-brand .mark::before{
+    content:'';
+    position:absolute;
+    top:50%;left:50%;
+    width:6px;height:6px;
+    background:var(--gold);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+  }
+  .rail-brand span{
+    font-family:'Cormorant Garamond', serif;
+    font-size:15px;
+    letter-spacing:0.04em;
+    color:var(--cream);
+    white-space:nowrap;
+    opacity:0;
+    transition:opacity 0.2s ease 0.05s;
+  }
+  .rail:hover .rail-brand span{opacity:1;}
+
+  .rail-nav{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .rail-link{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    padding:12px 20px;
+    text-decoration:none;
+    color:rgba(250,247,241,0.72);
+    font-size:13px;
+    letter-spacing:0.01em;
+    white-space:nowrap;
+    position:relative;
+    transition:color 0.15s ease, background 0.15s ease;
+  }
+  .rail-link:hover{
+    color:var(--cream);
+    background:rgba(184,154,94,0.1);
+  }
+  .rail-link.active{
+    color:var(--cream);
+  }
+  .rail-link.active::before{
+    content:'';
+    position:absolute;
+    left:0; top:8px; bottom:8px;
+    width:2px;
+    background:var(--gold);
+  }
+  .rail-link svg{flex:0 0 auto;}
+  .rail-link .label{
+    opacity:0;
+    transition:opacity 0.2s ease 0.05s;
+  }
+  .rail:hover .rail-link .label{opacity:1;}
+
+  .rail-foot{
+    margin-top:auto;
+    width:100%;
+    padding:16px 20px 0;
+    border-top:1px solid rgba(184,154,94,0.22);
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .rail-foot .avatar{
+    width:22px;height:22px;
+    border-radius:50%;
+    background:var(--gold);
+    color:var(--green-dark);
+    font-size:10px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+  }
+  .rail-foot span{
+    font-size:11px;
+    color:rgba(250,247,241,0.55);
+    white-space:nowrap;
+    opacity:0;
+    transition:opacity 0.2s ease 0.05s;
+  }
+  .rail:hover .rail-foot span{opacity:1;}
+
+  /* ===== CONTEÚDO ===== */
+  .page{
+    margin-left:var(--rail-w);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .content-inner{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:56px 24px 48px;
+  }
+
+  /* ===== CAPA (header + card horizontal) ===== */
+  .cover{
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+    padding:56px 24px 48px;
+    text-align:center;
+  }
+  .cover .eyebrow{
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .cover h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:42px;
+    color:var(--green);
+    letter-spacing:-0.01em;
+  }
+  .cover .sub{
+    margin-top:10px;
+    font-size:14px;
+    color:#6b6b6b;
+    margin-bottom:44px;
+  }
+
+  .current-label{
+    text-align:left;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#8a8a8a;
+    font-weight:600;
+    margin:0 auto 12px;
+    max-width:640px;
+  }
+
+  .cover-current{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    background:#fff;
+    border:1px solid rgba(44,79,58,0.08);
+    border-left:4px solid var(--green);
+    border-radius:14px;
+    padding:14px 18px;
+    box-shadow:0 6px 20px rgba(44,79,58,0.06);
+    text-align:left;
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  .cover-current .date-badge{
+    flex:0 0 auto;
+    width:46px;height:46px;
+    background:var(--green);
+    border-radius:9px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  .cover-current .date-badge .num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    font-weight:600;
+    color:#fff;
+    line-height:1;
+  }
+  .cover-current .date-badge .yr{
+    font-size:8px;
+    letter-spacing:0.04em;
+    color:var(--gold);
+    margin-top:2px;
+  }
+
+  .cover-current .info{flex:1 1 auto; min-width:0;}
+  .cover-current .label{
+    font-size:10px;
+    letter-spacing:0.13em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:3px;
+  }
+  .cover-current .month{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:21px;
+    color:var(--green);
+    line-height:1.2;
+  }
+
+  .cover-current a{
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:#fff;
+    border:1px solid rgba(44,79,58,0.18);
+    color:var(--text);
+    font-weight:600;
+    font-size:12px;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:9px;
+    transition:border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    white-space:nowrap;
+  }
+  .cover-current a:hover{
+    border-color:var(--green);
+    color:var(--green);
+    background:rgba(44,79,58,0.04);
+  }
+
+  @media (max-width:560px){
+    .cover-current{flex-wrap:wrap;}
+    .cover-current a{width:100%; justify-content:center; margin-top:6px;}
+  }
+
+  /* ===== HISTÓRICO ===== */
+  .history{
+    width:100%;
+    max-width:640px;
+  }
+  .history-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:22px;
+  }
+  .history-head h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:22px;
+    color:var(--green);
+  }
+  .history-head .count{
+    font-size:12px;
+    color:#a3a3a3;
+    letter-spacing:0.02em;
+  }
+
+  .year-group{margin-bottom:30px;}
+  .year-group:last-child{margin-bottom:0;}
+  .year-label{
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:12px;
+  }
+
+  .history-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+  @media (max-width:560px){
+    .history-grid{grid-template-columns:1fr;}
+  }
+
+  .history-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    background:#fff;
+    border:1px solid rgba(44,79,58,0.10);
+    border-left:3px solid var(--gold);
+    border-radius:10px;
+    padding:16px 18px;
+    text-decoration:none;
+    color:var(--text);
+    transition:transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .history-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(44,79,58,0.12);
+    border-left-color:var(--green);
+  }
+  .history-card .month-name{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    color:var(--green);
+    font-weight:600;
+  }
+  .history-card .arrow{
+    color:var(--gold);
+    font-size:16px;
+    transition:transform 0.15s ease;
+  }
+  .history-card:hover .arrow{transform:translateX(3px);}
+
+  .history-empty{
+    padding:28px 4px;
+    font-size:13px;
+    color:#999;
+    font-style:italic;
+    text-align:center;
+    border:1px dashed rgba(44,79,58,0.18);
+    border-radius:10px;
+  }
+
+  footer{
+    margin-top:56px;
+    font-size:12px;
+    color:#999;
+    text-align:center;
+    width:100%;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== MENU LATERAL DISCRETO ===== -->
+  <nav class="rail" aria-label="Menu">
+    <div class="rail-brand">
+      <span class="mark"></span>
+      <span>Tania Bulhões</span>
+    </div>
+    <div class="rail-nav">
+      <a class="rail-link active" href="#top">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+        <span class="label">Overview CX</span>
+      </a>
+      <a class="rail-link" href="#historico">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>
+        <span class="label">Histórico</span>
+      </a>
+    </div>
+    <div class="rail-foot">
+      <span class="avatar">CX</span>
+      <span>Customer Experience</span>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- CAPA -->
+    <section class="cover" id="top">
+      <div class="eyebrow">Customer Experience</div>
+      <h1>Overview CX · Tania Bulhões</h1>
+      <p class="sub">Relatório mensal de indicadores e principais resultados do período</p>
+
+      <div class="current-label">Relatório mais recente</div>
+
+      <!-- MÊS ATUAL -->
+      <!-- Para publicar um novo mês: troque o número/ano do badge, o texto do mês e o href abaixo,
+           e mova o mês anterior para dentro do grupo de ano correspondente em <div class="history"> -->
+      <div class="cover-current">
+        <div class="date-badge">
+          <span class="num">07</span>
+          <span class="yr">2026</span>
+        </div>
+        <div class="info">
+          <div class="label">Overview mensal</div>
+          <div class="month">Julho 2026</div>
+        </div>
+        <a href="./julho-2026.html">Abrir relatório <span>›</span></a>
+      </div>
+    </section>
+
+    <div class="content-inner">
+      <!-- HISTÓRICO -->
+      <!-- REGRA DE ORDENAÇÃO: os relatórios mais recentes sempre aparecem primeiro.
+           1) Novo ano → cria um novo <div class="year-group"> no TOPO de .history (acima dos anos anteriores).
+           2) Novo mês dentro do mesmo ano → insere o <a class="history-card"> no TOPO do .history-grid daquele ano.
+           A ordem no HTML é a ordem de exibição (não há reordenação automática por data). -->
+      <div class="history" id="historico">
+        <div class="history-head">
+          <h2>Histórico de meses anteriores</h2>
+          <span class="count">0 relatórios</span>
+        </div>
+
+        <!-- Exemplo de como adicionar um mês ao arquivar (dentro de um year-group, sempre no TOPO do grid):
+        <div class="year-group">
+          <div class="year-label">2026</div>
+          <div class="history-grid">
+            <a class="history-card" href="./junho-2026.html">
+              <span class="month-name">Junho</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+        -->
+
+        <div class="history-empty">Nenhum mês arquivado ainda.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>Tania Bulhões · Customer Experience</footer>
+
+</body>
+</html>
