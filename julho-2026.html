@@ -1480,28 +1480,33 @@
   // persist edits to localStorage, keyed by a stable path per editable element
   function pathFor(el){
     const slide = el.closest('.slide');
-    const slideIdx = slide.dataset.slide;
+    const slideIdx = slide ? slide.dataset.slide : 'global';
     if(el.dataset && el.dataset.editKey) return slideIdx + '-key-' + el.dataset.editKey;
-    const all = Array.from(slide.querySelectorAll('[data-cx-editable="true"]'));
+    const scope = slide || document;
+    const all = Array.from(scope.querySelectorAll('[data-cx-editable="true"]'));
     return slideIdx+'-'+all.indexOf(el);
   }
   function loadEdits(){
     let saved;
     try{ saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }catch(e){ saved = {}; }
     editableFields.forEach(el=>{
-      const key = pathFor(el);
-      if(saved[key] !== undefined) el.innerHTML = saved[key];
+      try{
+        const key = pathFor(el);
+        if(saved[key] !== undefined) el.innerHTML = saved[key];
+      }catch(e){ console.error('loadEdits: falha ao restaurar um campo, pulando', e); }
     });
   }
   function saveEdit(el){
-    let saved;
-    try{ saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }catch(e){ saved = {}; }
-    saved[pathFor(el)] = el.innerHTML;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-    saveNote.classList.add('show');
-    clearTimeout(saveEdit._t);
-    saveEdit._t = setTimeout(()=>saveNote.classList.remove('show'), 1200);
-    scheduleGithubSync();
+    try{
+      let saved;
+      try{ saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }catch(e){ saved = {}; }
+      saved[pathFor(el)] = el.innerHTML;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      saveNote.classList.add('show');
+      clearTimeout(saveEdit._t);
+      saveEdit._t = setTimeout(()=>saveNote.classList.remove('show'), 1200);
+      scheduleGithubSync();
+    }catch(e){ console.error('saveEdit: falha ao salvar um campo', e); }
   }
   refreshEditableFields();
   loadEdits();
