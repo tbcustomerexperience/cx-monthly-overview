@@ -720,18 +720,18 @@
     <div class="eyebrow">TANIA BULHÕES · CX</div>
     <div class="nav-title">Overview — Julho 2026</div>
   </div>
-  <ul id="navList"><li class=""><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li class="active"><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li class=""><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
+  <ul id="navList"><li class="active"><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
 </nav>
 
 <div id="deck">
 
   <!-- SLIDE 1 — CAPA -->
-  <section class="slide cover-slide" data-slide="1">
+  <section class="slide cover-slide active" data-slide="1">
     <div class="cover-image" role="img" aria-label="Overview Customer Experience Tania Bulhões"></div>
   </section>
 
   <!-- SLIDE 2 — INDICADORES OPERACIONAIS -->
-  <section class="slide active" data-slide="2">
+  <section class="slide" data-slide="2">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
       <div class="slide-header-row">
@@ -1247,9 +1247,9 @@
   <div class="left">
     <button id="prevBtn">← Anterior</button>
     <button id="nextBtn">Próximo →</button>
-    <span id="slideLabel">2 / 10</span>
+    <span id="slideLabel">1 / 10</span>
   </div>
-  <div id="dots"><span class=""></span><span class="active"></span><span class=""></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div id="dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="right">
     <span id="saveNote" class="">alterações salvas</span>
     <span id="ghSyncNote" class="busy">GitHub: salvando…</span>
@@ -2172,7 +2172,9 @@
     return btoa(unescape(encodeURIComponent(str)));
   }
 
-  async function publishToGithub(cfg, _retried){
+  async function publishToGithub(cfg, _attempt){
+    _attempt = _attempt || 1;
+    const MAX_ATTEMPTS = 4; // 1 tentativa normal + até 3 retentativas em caso de 409
     if(!cfg.token || !cfg.owner || !cfg.repo || !cfg.path){
       setGhStatus('configuração incompleta', 'err');
       return false;
@@ -2185,8 +2187,11 @@
     setGhStatus('salvando…', 'busy');
     try{
       // 1) busca o sha atual do arquivo (se existir)
+      // cache:'no-store' evita que o navegador reaproveite uma resposta antiga
+      // desta mesma URL guardada em cache HTTP, o que faria a gente sempre
+      // enviar um sha desatualizado e cair em 409 mesmo depois de tentar de novo.
       let sha = undefined;
-      const getResp = await fetch(apiUrl + '?ref=' + encodeURIComponent(cfg.branch), { headers });
+      const getResp = await fetch(apiUrl + '?ref=' + encodeURIComponent(cfg.branch), { headers, cache: 'no-store' });
       if(getResp.status === 200){
         const data = await getResp.json();
         sha = data.sha;
@@ -2221,10 +2226,13 @@
       });
       if(!putResp.ok){
         const errBody = await putResp.text();
-        // 409 = conflito de versão (sha desatualizado, ex.: dois salvamentos ao mesmo tempo).
-        // Tenta 1x automaticamente com o sha mais recente antes de reportar erro.
-        if(putResp.status === 409 && !_retried){
-          return publishToGithub(cfg, true);
+        // 409 = conflito de versão (sha desatualizado, ex.: dois salvamentos ao mesmo tempo,
+        // ou outra aba/dispositivo salvando em paralelo). Tenta de novo automaticamente,
+        // buscando o sha mais recente a cada tentativa, com uma pequena pausa crescente
+        // entre elas, antes de reportar erro ao usuário.
+        if(putResp.status === 409 && _attempt < MAX_ATTEMPTS){
+          await new Promise(r => setTimeout(r, 400 * _attempt));
+          return publishToGithub(cfg, _attempt + 1);
         }
         throw new Error('Falha ao salvar (HTTP ' + putResp.status + '): ' + errBody);
       }
