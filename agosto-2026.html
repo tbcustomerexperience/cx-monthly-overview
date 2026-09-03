@@ -896,9 +896,9 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 <nav id="sideNav" aria-label="Navegação entre páginas">
   <div class="nav-head">
     <div class="eyebrow">TANIA BULHÕES · CX</div>
-    <div class="nav-title" contenteditable="true">Overview — Julho 2026</div>
+    <div class="nav-title" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Overview — Agosto 2026</div>
   </div>
-  <ul id="navList"><li class=""><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li class="active"><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li class=""><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li class=""><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li class=""><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li class=""><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li class=""><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li class=""><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
+  <ul id="navList"><li class=""><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li class=""><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li class="active"><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
 </nav>
 
 <div id="deck">
@@ -912,7 +912,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
   </section>
 
   <!-- SLIDE 2 — INDICADORES OPERACIONAIS -->
-  <section class="slide active" data-slide="2">
+  <section class="slide" data-slide="2">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
       <div class="slide-header-row">
@@ -930,7 +930,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
       <div class="grid-2">
         <div class="card">
           <h3 contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Principais motivos de contato</h3>
-          <div class="chart-wrap"><canvas id="chartMotivos" style="display: block; box-sizing: border-box; width: 509px; height: 210px;" width="637" height="262"></canvas></div>
+          <div class="chart-wrap"><canvas id="chartMotivos" style="display: block; box-sizing: border-box; width: 509px; height: 210px;" width="509" height="210"></canvas></div>
           <div class="donut-editor" data-chart="chartMotivos">
             <div class="donut-editor-row"><span class="donut-swatch" style="background:#2C4F3A;"></span><span class="donut-label" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Solicitação</span><span class="donut-value" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">32</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
             <div class="donut-editor-row"><span class="donut-swatch" style="background:#B89A5E;"></span><span class="donut-label" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Pergunta</span><span class="donut-value" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">28</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
@@ -942,7 +942,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
         </div>
         <div class="card">
           <h3 contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Principais problemas relatados</h3>
-          <div class="chart-wrap"><canvas id="chartProblemas" style="display: block; box-sizing: border-box; width: 509px; height: 210px;" width="637" height="262"></canvas></div>
+          <div class="chart-wrap"><canvas id="chartProblemas" style="display: block; box-sizing: border-box; width: 509px; height: 210px;" width="509" height="210"></canvas></div>
           <div class="donut-editor" data-chart="chartProblemas">
             <div class="donut-editor-row"><span class="donut-swatch" style="background:#2C4F3A;"></span><span class="donut-label" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Problemas na Entrega</span><span class="donut-value" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">43</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
             <div class="donut-editor-row"><span class="donut-swatch" style="background:#B89A5E;"></span><span class="donut-label" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Produto com Defeito</span><span class="donut-value" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">23</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
@@ -1039,7 +1039,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 
       <div class="card">
         <h3>CSAT — Evolução Mensal <span class="tag">meta ≥ 90%</span></h3>
-        <div class="chart-wrap tall"><canvas id="chartCsat" style="display: block; box-sizing: border-box; width: 1102px; height: 292px;" width="1377" height="365"></canvas></div>
+        <div class="chart-wrap tall"><canvas id="chartCsat" style="display: block; box-sizing: border-box; width: 1102px; height: 292px;" width="1102" height="292"></canvas></div>
       </div>
     </div>
   </section>
@@ -1153,7 +1153,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
   </section>
 
   <!-- SLIDE 4 — TROCAS & DEVOLUÇÕES OVERVIEW -->
-  <section class="slide" data-slide="5">
+  <section class="slide active" data-slide="5">
     <div class="slide-inner">
       <div class="eyebrow">Experiência do Cliente</div>
       <div class="slide-header-row">
@@ -1164,40 +1164,40 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
       <div class="kpi-row" style="grid-template-columns:1.35fr 1fr 1fr 1fr; margin-bottom:20px;">
         <div class="kpi-card" style="border-left-color:var(--bad);">
           <div class="lbl" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Total acumulado</div>
-          <div class="val" id="trocasTotalAcumulado" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">R$&nbsp;385.586</div>
-          <div class="delta flat" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">Jan a Jul 2026</div>
+          <div class="val" id="trocasTotalAcumulado" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">R$&nbsp;445.852</div>
+          <div class="delta flat" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">jan a ago 2026</div>
         </div>
         <div class="kpi-card" style="border-left-color:var(--gold);">
-          <div class="lbl" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Total julho</div>
-          <div class="val" id="trocasTotalMes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">R$&nbsp;73.400</div>
-          <div class="delta" id="trocasVariacaoMes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">▲ +86,6% vs. junho</div>
+          <div class="lbl" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Total agosto</div>
+          <div class="val" id="trocasTotalMes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">R$&nbsp;60.803</div>
+          <div class="delta" id="trocasVariacaoMes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">▼ -16,5% vs. junho</div>
         </div>
         <div class="kpi-card">
           <div class="lbl" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Total de Devoluções</div>
-          <div class="val" id="trocasTotalDevolucoes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">R$&nbsp;271.131</div>
-          <div class="delta flat" id="trocasPercDevolucoes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">70,3% do total</div>
+          <div class="val" id="trocasTotalDevolucoes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">R$&nbsp;316.312</div>
+          <div class="delta flat" id="trocasPercDevolucoes" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">70,9% do total</div>
         </div>
         <div class="kpi-card">
           <div class="lbl" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">total de Trocas</div>
-          <div class="val" id="trocasTotalTrocas" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">R$&nbsp;114.455</div>
-          <div class="delta flat" id="trocasPercTrocas" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">29,7% do total</div>
+          <div class="val" id="trocasTotalTrocas" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">R$&nbsp;129.540</div>
+          <div class="delta flat" id="trocasPercTrocas" data-cx-editable="true" data-cx-blur-bound="1" contenteditable="false">29,1% do total</div>
         </div>
       </div>
 
       <div class="card">
         <h3>Valores em R$ — Devolução vs. Troca por mês</h3>
-        <div class="chart-wrap tall"><canvas id="chartTrocas" style="display: block; box-sizing: border-box; width: 1087px; height: 310px;" width="1358" height="387"></canvas></div>
+        <div class="chart-wrap tall"><canvas id="chartTrocas" style="display: block; box-sizing: border-box; width: 1087px; height: 310px;" width="1087" height="310"></canvas></div>
         <table class="tb" style="margin-top:14px;" id="tblTrocas">
           <thead><tr><th>Mês</th><th>Troca</th><th>Devolução</th><th>Total</th><th>Variação mensal</th><th class="row-actions-th"></th></tr></thead>
           <tbody>
-            <tr><td>Jan</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 25.146</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 49.283</td><td>R$&nbsp;74.429,00</td><td>–</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
+            <tr><td>Jan</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 25.146</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 49.301</td><td>R$&nbsp;74.447,00</td><td>–</td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
             <tr><td>Fev</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.791</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 40.809</td><td>R$&nbsp;53.600,00</td><td><span class="pill">-28,0%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
             <tr><td>Mar</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 27.619</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 39.147</td><td>R$&nbsp;66.766,00</td><td><span class="pill">+24,6%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
             <tr><td>Abr</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.775</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 25.231</td><td>R$&nbsp;38.006,00</td><td><span class="pill">-43,1%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
             <tr><td>Mai</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 9.803</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 30.241</td><td>R$&nbsp;40.044,00</td><td><span class="pill">+5,4%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
             <tr><td>Jun</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 12.711</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 26.630</td><td>R$&nbsp;39.341,00</td><td><span class="pill">-1,8%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
-            <tr><td>Jul</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 13.610</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 59.790</td><td>R$&nbsp;73.400,00</td><td><span class="pill">+86,6%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
-          </tbody>
+            <tr><td>Jul</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 14.600</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 58.245</td><td>R$&nbsp;72.845,00</td><td><span class="pill">+85,2%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr>
+          <tr><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Ago</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 14.095</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 46.708</td><td>R$&nbsp;60.803,00</td><td><span class="pill">-16,5%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr></tbody>
         </table>
         <button type="button" class="add-card-btn" onclick="addMesRow()">+ Adicionar mês</button>
       </div>
@@ -1225,7 +1225,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
         </div>
         <div class="card">
           <h3>Principais motivos de devolução</h3>
-          <div class="chart-wrap"><canvas id="chartMotivosDevolucao" style="display: block; box-sizing: border-box; width: 509px; height: 210px;" width="637" height="262"></canvas></div>
+          <div class="chart-wrap"><canvas id="chartMotivosDevolucao" style="display: block; box-sizing: border-box; width: 509px; height: 210px;" width="509" height="210"></canvas></div>
           <div class="donut-editor" data-chart="chartMotivosDevolucao">
             <div class="donut-editor-row"><span class="donut-swatch" style="background:#2C4F3A;"></span><span class="donut-label" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Desistência ou Arrependimento</span><span class="donut-value" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">63,3</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
             <div class="donut-editor-row"><span class="donut-swatch" style="background:#B89A5E;"></span><span class="donut-label" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Produto com Defeito</span><span class="donut-value" contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">11,38</span><button type="button" class="remove-row-btn" onclick="removeDonutSlice(this)" title="Excluir fatia">×</button></div>
@@ -1428,9 +1428,9 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
   <div class="left">
     <button id="prevBtn">← Anterior</button>
     <button id="nextBtn">Próximo →</button>
-    <span id="slideLabel">2 / 10</span>
+    <span id="slideLabel">5 / 10</span>
   </div>
-  <div id="dots"><span class=""></span><span class="active"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+  <div id="dots"><span class=""></span><span class=""></span><span></span><span></span><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="right">
     <span id="saveNote" class="">alterações salvas</span>
     <span id="ghSyncNote" class="busy">GitHub: salvando…</span>
