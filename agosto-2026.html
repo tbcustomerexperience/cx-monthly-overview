@@ -105,6 +105,8 @@
   .kpi-row.n3{grid-template-columns:repeat(3,1fr); max-width:680px;}
   .kpi-row.n4{grid-template-columns:repeat(4,1fr);}
   .kpi-card{background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--green); border-radius:6px; padding:18px 16px; box-shadow:var(--shadow); text-align:center; display:flex; flex-direction:column; align-items:center;}
+  .kpi-card.highlight{background:var(--sand-dark); border-color:var(--sand-dark);}
+  .kpi-card.highlight .lbl{color:var(--green-deep);}
   .kpi-card .lbl{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap;}
   .kpi-card .val{font-family:'DM Sans',sans-serif; font-size:30px; font-weight:500; color:#3D3F39; margin-top:6px; font-style:normal; letter-spacing:-.015em;}
   .kpi-card .delta{font-size:11.5px; font-weight:600; margin-top:2px;}
@@ -130,6 +132,21 @@
   .collapsible-toggle .collapsible-chevron{font-size:22px; line-height:1; color:var(--ink-soft); transition:transform .2s ease; flex-shrink:0; margin-left:12px;}
   .collapsible-toggle[aria-expanded="false"] .collapsible-chevron{transform:rotate(-90deg);}
   .collapsible-toggle[aria-expanded="false"] + .collapsible-body{display:none;}
+  .data-toggle{display:inline-flex; align-items:center; gap:6px; width:auto; margin:14px 0 0; padding:7px 14px; border:1px solid var(--line); border-radius:100px; background:transparent; color:var(--green-deep); font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; letter-spacing:.02em; cursor:pointer;}
+  .data-toggle:hover{background:var(--sand);}
+  .data-toggle .collapsible-chevron{font-size:15px; margin-left:0;}
+  .data-toggle + .collapsible-body{margin-top:14px;}
+  @media print{ .data-toggle{display:none !important;} .data-toggle + .collapsible-body{display:block !important;} }
+  .admin-toggle{display:none; align-items:center; gap:5px; margin:14px 0 0 10px; padding:4px 11px; border:1px dashed var(--line); border-radius:100px; background:transparent; color:var(--ink-soft); font-family:'DM Sans',sans-serif; font-size:10.5px; font-weight:600; letter-spacing:.01em; cursor:pointer; opacity:.8;}
+  .admin-toggle:hover{opacity:1; background:var(--sand); color:var(--green-deep);}
+  body.edit-mode .admin-toggle{display:inline-flex;}
+  @media print{ .admin-toggle{display:none !important;} }
+  .card.discreet{padding:14px 18px; box-shadow:none; border:1px dashed var(--line); background:transparent;}
+  .card.discreet .discreet-label{font-family:'DM Sans',sans-serif; font-style:normal; font-weight:600; font-size:12px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em;}
+  .card.discreet .collapsible-chevron{font-size:16px;}
+  .card.discreet table.tb{font-size:11px;}
+  .card.discreet table.tb th{font-size:9.5px; padding:6px 9px; background:transparent; color:var(--ink-soft);}
+  .card.discreet table.tb td{padding:6px 9px; color:var(--ink-soft);}
   .card h3{font-size:16px; font-weight:500; color:var(--green-deep); margin:0 0 14px;}
   .card h3 .tag{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin-left:8px; font-family:'DM Sans',sans-serif; font-style:normal;}
   .section-label{font-size:16px; font-weight:500; color:var(--green-deep); margin:0 0 14px; font-family:'Cormorant Garamond',serif;}
@@ -143,6 +160,11 @@
   table.tb tr:last-child td{border-bottom:none;}
   .pill{display:inline-block; padding:2px 9px; border-radius:100px; font-size:11px; font-weight:700;}
   .pill.good{background:#E4EFE6; color:var(--ok);} .pill.mid{background:#F5EAD6; color:var(--warn);} .pill.bad{background:#F4E1DC; color:var(--bad);}
+  #tblEntrega td:nth-child(1){font-weight:600; color:var(--green-deep);}
+  #tblEntrega td:nth-child(2), #tblEntrega td:nth-child(5){text-align:center; font-variant-numeric:tabular-nums; font-weight:600;}
+  #tblEntrega td:nth-child(3){text-align:center; font-variant-numeric:tabular-nums; color:var(--ink-soft);}
+  #tblEntrega td:nth-child(4), #tblEntrega td:nth-child(6){text-align:center;}
+  #tblEntrega.hide-total-mes th:nth-child(3), #tblEntrega.hide-total-mes td:nth-child(3){display:none;}
   .badge-otimo{display:inline-block; background:var(--ok); color:#fff; font-size:10px; font-weight:700; letter-spacing:.05em; padding:2px 9px; border-radius:100px; margin-right:8px; vertical-align:middle;}
   .insight-banner{background:var(--sand); border-left:3px solid var(--gold); border-radius:6px; padding:12px 16px; font-size:13px; color:var(--ink); margin-top:14px;}
   .insight-banner b{color:var(--green-deep);}
@@ -211,6 +233,9 @@
   body.edit-mode [contenteditable="true"]{outline:1.5px dashed var(--gold); outline-offset:2px; border-radius:3px; cursor:text;}
   body.edit-mode [contenteditable="true"]:hover{background:rgba(184,154,94,.08);}
   body.edit-mode [contenteditable="true"]:focus{outline:1.5px solid var(--green); background:#fff;}
+  body.edit-mode .slide-header-row .slide-sub[contenteditable="true"]:focus{background:var(--green); color:#fff;}
+  body.edit-mode .badge-otimo[contenteditable="true"]:focus{background:var(--ok); color:#fff;}
+  body.edit-mode #sideNav .nav-head .nav-title[contenteditable="true"]:focus{background:var(--green-cover); color:#F7F4EC;}
   body.edit-mode .channel-edit{outline:1.5px dashed var(--gold); outline-offset:2px; cursor:text;}
   body.edit-mode .channel-edit:hover{filter:brightness(.96); transform:scale(1.04);}
   body.edit-mode .channel-edit:focus{outline:1.5px solid var(--green);}
@@ -879,7 +904,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 <nav aria-label="Navegação entre páginas" id="sideNav">
 <div class="nav-head">
 <div class="eyebrow">TANIA BULHÕES · CX</div>
-<div class="nav-title">Overview — Julho 2026</div>
+<div class="nav-title" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Overview — Julho 2026</div>
 </div>
 <ul id="navList"><li class=""><button type="button"><span class="n">01</span><span class="t">Capa</span></button></li><li class="active"><button type="button"><span class="n">02</span><span class="t">Indicadores Operacionais</span></button></li><li class=""><button type="button"><span class="n">03</span><span class="t">Satisfação do Cliente</span></button></li><li class=""><button type="button"><span class="n">04</span><span class="t">Reclame Aqui</span></button></li><li class=""><button type="button"><span class="n">05</span><span class="t">Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">06</span><span class="t">Análise de Trocas &amp; Devoluções</span></button></li><li class=""><button type="button"><span class="n">07</span><span class="t">Métricas Proprietárias</span></button></li><li class=""><button type="button"><span class="n">08</span><span class="t">Social Listening</span></button></li><li class=""><button type="button"><span class="n">09</span><span class="t">Aconteceu nas Redes</span></button></li><li class=""><button type="button"><span class="n">10</span><span class="t">Encerramento</span></button></li></ul>
 </nav>
@@ -900,7 +925,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 <div class="slide-sub" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Agosto2026</div>
 </div>
 <div class="kpi-row n4">
-<div class="kpi-card"><div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Contatos Recebidos</div><div class="val" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">1.505</div></div>
+<div class="kpi-card"><div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Contatos Recebidos</div><div class="val" id="kpiContatosRecebidos" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">1.505</div></div>
 <div class="kpi-card"><div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Tempo Médio 1ª Resposta</div><div class="val" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">5 min</div></div>
 <div class="kpi-card"><div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Backlog</div><div class="val" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">161</div></div>
 <div class="kpi-card" style="border-left-color:var(--warn);"><div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">SLA</div><div class="val" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">78%</div></div>
@@ -932,8 +957,53 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 </div>
 <div class="insight-banner" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true"><div class="qMYqUG_convSearchResultHighlightRoot"><div class="" data-turn-id-container="request-WEB:e397c9c1-9277-4749-a28b-d9effa9fee17-124" data-is-intersecting="true"><section class="text-token-text-primary w-full focus:outline-none has-data-writing-block:pointer-events-none [&amp;:has([data-writing-block])&gt;*]:pointer-events-auto R6Vx5W_threadScrollVars scroll-mb-[calc(var(--scroll-root-safe-area-inset-bottom,0px)+var(--thread-response-height))] scroll-mt-[calc(var(--header-height)+min(200px,max(70px,20svh)))]" dir="auto" data-turn-id="request-WEB:e397c9c1-9277-4749-a28b-d9effa9fee17-124" data-turn-id-container="request-WEB:e397c9c1-9277-4749-a28b-d9effa9fee17-124" data-testid="conversation-turn-54" data-turn="assistant"><div class="text-base my-auto mx-auto pb-8 [--thread-content-margin:var(--thread-content-margin-xs,calc(var(--spacing)*4))] @w-sm/main:[--thread-content-margin:var(--thread-content-margin-sm,calc(var(--spacing)*6))] @w-lg/main:[--thread-content-margin:var(--thread-content-margin-lg,calc(var(--spacing)*16))] px-(--thread-content-margin)"><div data-conversation-screenshot-content="" class="[--thread-content-max-width:40rem] @w-lg/main:[--thread-content-max-width:48rem] mx-auto max-w-(--thread-content-max-width) flex-1 group/turn-messages focus-visible:outline-hidden relative flex w-full min-w-0 flex-col agent-turn"><div class="flex max-w-full flex-col gap-4 grow"><div data-message-author-role="assistant" data-message-id="7d1baa79-b9e5-47d9-91a5-b1f84157563e" dir="auto" data-message-model-slug="gpt-5-6" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal outline-none keyboard-focused:focus-ring [.text-message+&amp;]:mt-1" data-turn-start-message="true" tabindex="0"><div class="flex w-full flex-col gap-1 empty:hidden"><div class="markdown prose dark:prose-invert wrap-break-word w-full light markdown-new-styling"><p data-start="0" data-end="307" data-is-last-node="" data-is-only-node="" class="PDq2pG_selectionAnchorContainer">Do total de <strong data-start="12" data-end="30">1.505 contatos</strong>, <strong data-start="32" data-end="70">17% estão relacionados a problemas</strong>, representando mais de <strong data-start="94" data-end="107">250 casos</strong>. Desse volume, <strong data-start="123" data-end="130">60%</strong>, mais de <strong data-start="123" data-end="130">135</strong>&nbsp;ocorrências, estão concentrados em <strong data-start="179" data-end="203">problemas na entrega</strong>. Na sequência, aparecem <strong data-start="228" data-end="259">defeito de produto, com 16%</strong>, e <strong data-start="263" data-end="306">atraso no atendimento do pedido, com 7%</strong>.<span aria-hidden="true" class="PDq2pG_selectionAnchor"></span></p></div></div></div></div><div class="z-0 flex min-h-[46px] justify-start"></div><div class="mt-3 w-full empty:hidden has-[&gt;_:empty]:hidden"><div class="text-center"></div></div></div><div data-conversation-screenshot-content="" class="[--thread-content-max-width:40rem] @w-lg/main:[--thread-content-max-width:48rem] mx-auto max-w-(--thread-content-max-width) flex-1"><div></div></div></div></section></div></div><div aria-hidden="true" class="pointer-events-none -mt-px h-px translate-y-(--scroll-root-safe-area-inset-bottom)"></div></div>
 <div class="card" style="margin-top:18px;">
+<div style="display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:14px;">
+<h3 contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="margin:0;">Problemas na Entrega</h3>
+<div contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="border:1px solid var(--line); border-radius:100px; padding:6px 16px; font-size:11px; color:var(--ink-soft); font-weight:600; letter-spacing:.02em; flex-shrink:0;">Jan a Ago 2026</div>
+</div>
+<div class="kpi-row n4">
+<div class="kpi-card">
+<div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Problemas no Mês</div>
+<div class="val" id="probEntregaNoMes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">256</div>
+<div class="delta flat" id="probEntregaNoMesSub" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">17% do total de contatos</div>
+</div>
+<div class="kpi-card">
+<div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Problemas na Entrega</div>
+<div class="val" id="probEntregaNaEntrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">154</div>
+<div class="delta flat" id="probEntregaNaEntregaSub" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">60% dos contatos de problema</div>
+</div>
+<div class="kpi-card">
+<div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Variação vs. Mês Anterior</div>
+<div class="val" id="probEntregaVariacao" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">+175%</div>
+<div class="delta flat" id="probEntregaVariacaoSub" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">56 em jul para 154 em ago</div>
+</div>
+<div class="kpi-card highlight">
+<div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Concentração do Período</div>
+<div class="val" id="probEntregaConcentracao" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">60%</div>
+<div class="delta flat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Maior participação do período</div>
+</div>
+</div>
+<h3 contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="margin:26px 0 14px;">Evolução dos Contatos sobre Problemas na Entrega</h3>
+<table class="tb" id="tblEntrega">
+<thead><tr><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Mês</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="text-align:center;">Contatos com Problema</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="text-align:center;">Total de Contatos</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="text-align:center;">% do Total</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="text-align:center;">Problemas na Entrega</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="text-align:center;">% em Entrega</th><th class="row-actions-th"></th></tr></thead>
+<tbody>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Jan</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">338</td><td class="val-total-mes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">—</td><td class="pct-total-auto">25%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">89</td><td class="pct-dentro-auto">26%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Fev</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">184</td><td class="val-total-mes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">—</td><td class="pct-total-auto">14%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">48</td><td class="pct-dentro-auto">26%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Mar</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">164</td><td class="val-total-mes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">—</td><td class="pct-total-auto">12%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">42</td><td class="pct-dentro-auto">26%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Abr</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">95</td><td class="val-total-mes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">—</td><td class="pct-total-auto">7%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">37</td><td class="pct-dentro-auto">39%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Mai</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">93</td><td class="val-total-mes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">—</td><td class="pct-total-auto">7%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">29</td><td class="pct-dentro-auto">31%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Jun</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">92</td><td class="val-total-mes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">—</td><td class="pct-total-auto">7%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">46</td><td class="pct-dentro-auto">50%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Jul</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">130</td><td class="val-total-mes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">—</td><td class="pct-total-auto">10%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">56</td><td class="pct-dentro-auto">43%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Ago</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">256</td><td class="val-total-mes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">1.505</td><td class="pct-total-auto">19%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">154</td><td class="pct-dentro-auto">60%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+</tbody>
+</table>
+<button class="add-card-btn" onclick="addEntregaRow()" type="button">+ Adicionar mês</button>
+<button class="admin-toggle" id="toggleTotalMesBtn" onclick="toggleTotalMesColumn()" type="button">⚙ Ocultar coluna "Total de Contatos"</button>
+<div style="font-size:11px; color:var(--ink-soft); margin-top:8px;">As colunas de % são calculadas automaticamente. "% do Total" usa o "Total de Contatos" informado em cada linha — preencha esse campo mês a mês; sem ele, a linha mostra "–". "% em Entrega" usa "Contatos com Problema" e "Problemas na Entrega".</div>
+</div>
+<div class="card discreet" style="margin-top:24px;">
 <button aria-expanded="false" class="collapsible-toggle" onclick="toggleCollapsible(this)" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:none; border:none; padding:0; margin:0 0 10px; cursor:pointer; font:inherit; text-align:left;" type="button">
-<h3 contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="margin:0;">Glossário — Tipos de contato</h3>
+<span class="discreet-label" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Glossário — Tipos de contato</span>
 <span aria-hidden="true" class="collapsible-chevron">▾</span>
 </button>
 <div class="collapsible-body">
@@ -949,46 +1019,6 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 </table>
 </div>
 </div>
-<div class="card" style="margin-top:18px;">
-<div style="display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:14px;">
-<h3 contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="margin:0;">Evolução dos Contatos sobre Problemas na Entrega</h3>
-<div contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="border:1px solid var(--line); border-radius:100px; padding:6px 16px; font-size:11px; color:var(--ink-soft); font-weight:600; letter-spacing:.02em; flex-shrink:0;">Jan a Ago 2026</div>
-</div>
-<table class="tb" id="tblEntrega">
-<thead><tr><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Mês</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Contatos classificados como problema</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">% do total de contatos</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Contatos sobre problemas na entrega</th><th contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">% dentro dos contatos de problema</th><th class="row-actions-th"></th></tr></thead>
-<tbody>
-<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Jan</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">338</td><td class="pct-total-auto">25%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">89</td><td class="pct-dentro-auto">26%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Fev</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">184</td><td class="pct-total-auto">14%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">48</td><td class="pct-dentro-auto">26%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Mar</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">164</td><td class="pct-total-auto">12%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">42</td><td class="pct-dentro-auto">26%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Abr</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">95</td><td class="pct-total-auto">7%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">37</td><td class="pct-dentro-auto">39%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Mai</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">93</td><td class="pct-total-auto">7%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">29</td><td class="pct-dentro-auto">31%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Jun</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">92</td><td class="pct-total-auto">7%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">46</td><td class="pct-dentro-auto">50%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Jul</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">130</td><td class="pct-total-auto">10%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">56</td><td class="pct-dentro-auto">43%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr style="background:var(--sand);"><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:700;">Ago</td><td class="val-problema" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:700;">256</td><td class="pct-total-auto" style="font-weight:700;">19%</td><td class="val-entrega" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-weight:600;">154</td><td class="pct-dentro-auto" style="font-weight:700;">60%</td><td class="row-actions"><button class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-</tbody>
-</table>
-<button class="add-card-btn" onclick="addEntregaRow()" type="button">+ Adicionar mês</button>
-<div style="font-size:11px; color:var(--ink-soft); margin-top:8px;">As colunas de % são calculadas automaticamente a partir de "Contatos classificados como problema" e "Contatos sobre problemas na entrega".</div>
-</div>
-<div class="kpi-row" style="grid-template-columns:repeat(3,1fr); margin-top:18px;">
-<div class="kpi-card" style="text-align:left; align-items:flex-start;">
-<div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="justify-content:flex-start;"><font color="#1f3a2a"><b>*Agosto Parcial</b></font></div>
-<div class="val" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true"><br></div>
-<div contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-size:11px; color:var(--ink-soft);">Maior volume desde fevereiro.</div>
-</div>
-<div class="kpi-card" style="text-align:left; align-items:flex-start;">
-<div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="justify-content:flex-start;">Variação vs. Julho</div>
-<div class="val" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">+41,8%</div>
-<div contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-size:11px; color:var(--ink-soft);">De 55 para 78 contatos relacionados a problemas na entrega.</div>
-</div>
-<div class="kpi-card" style="text-align:left; align-items:flex-start;">
-<div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="justify-content:flex-start;">Concentração em Agosto</div>
-<div class="val" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">66%</div>
-<div contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-size:11px; color:var(--ink-soft);">Dos contatos classificados como problema estão ligados à entrega.</div>
-</div>
-</div>
-<div class="insight-banner" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true"><font color="#1f3a2a"><b>*Agosto Parcial</b></font></div>
-<div contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="font-size:11px; color:var(--ink-soft); margin-top:10px;"><br></div>
 </div>
 </section>
 <!-- SLIDE 3 — SATISFAÇÃO -->
@@ -1009,6 +1039,25 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 <div class="card">
 <h3>CSAT — Evolução Mensal <span class="tag">meta ≥ 90%</span></h3>
 <div class="chart-wrap tall"><canvas height="328" id="chartCsat" style="display: block; box-sizing: border-box; width: 1102px; height: 292px;" width="1239"></canvas></div>
+<button aria-expanded="false" class="collapsible-toggle data-toggle" onclick="toggleCollapsible(this)" type="button">
+<span>Ver dados por mês</span>
+<span aria-hidden="true" class="collapsible-chevron">▾</span>
+</button>
+<div class="collapsible-body">
+<table class="tb" id="tblCsat" style="margin-top:14px;">
+<thead><tr><th>Mês</th><th>CSAT</th><th>Meta</th><th class="row-actions-th"></th></tr></thead>
+<tbody>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">jan</td><td class="val-csat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">90</td><td class="val-meta" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">90</td><td class="row-actions"><button class="remove-row-btn" onclick="removeCsatRow(this)" title="Excluir mês" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">fev</td><td class="val-csat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">81</td><td class="val-meta" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">90</td><td class="row-actions"><button class="remove-row-btn" onclick="removeCsatRow(this)" title="Excluir mês" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">mar</td><td class="val-csat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">83</td><td class="val-meta" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">90</td><td class="row-actions"><button class="remove-row-btn" onclick="removeCsatRow(this)" title="Excluir mês" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">abr</td><td class="val-csat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">87</td><td class="val-meta" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">90</td><td class="row-actions"><button class="remove-row-btn" onclick="removeCsatRow(this)" title="Excluir mês" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">mai</td><td class="val-csat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">92</td><td class="val-meta" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">90</td><td class="row-actions"><button class="remove-row-btn" onclick="removeCsatRow(this)" title="Excluir mês" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">jun</td><td class="val-csat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">91</td><td class="val-meta" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">90</td><td class="row-actions"><button class="remove-row-btn" onclick="removeCsatRow(this)" title="Excluir mês" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">jul</td><td class="val-csat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">93</td><td class="val-meta" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">90</td><td class="row-actions"><button class="remove-row-btn" onclick="removeCsatRow(this)" title="Excluir mês" type="button">×</button></td></tr>
+</tbody>
+</table>
+<button class="add-card-btn" onclick="addCsatRow()" type="button">+ Adicionar mês</button>
+</div>
 </div>
 </div>
 </section>
@@ -1142,21 +1191,27 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 </div>
 </div>
 <div class="card">
-<h3>Valores em R$ — Devolução vs. Troca por mês</h3>
+<h3 style="margin:0 0 10px;">Valores em R$ — Devolução vs. Troca por mês</h3>
 <div class="chart-wrap tall"><canvas height="348" id="chartTrocas" style="display: block; box-sizing: border-box; width: 1085px; height: 310px;" width="1220"></canvas></div>
+<button aria-expanded="false" class="collapsible-toggle data-toggle" onclick="toggleCollapsible(this)" type="button">
+<span>Ver dados por mês</span>
+<span aria-hidden="true" class="collapsible-chevron">▾</span>
+</button>
+<div class="collapsible-body">
 <table class="tb" id="tblTrocas" style="margin-top:14px;">
 <thead><tr><th>Mês</th><th>Troca</th><th>Devolução</th><th>Total</th><th>Variação mensal</th><th class="row-actions-th"></th></tr></thead>
 <tbody>
-<tr><td>Jan</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 25.513</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 49.702</td><td>R$&nbsp;75.215,00</td><td>–</td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td>Fev</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 10.863</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 42.546</td><td>R$&nbsp;53.409,00</td><td><span class="pill">-29,0%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td>Mar</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 20.881</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 45.565</td><td>R$&nbsp;66.446,00</td><td><span class="pill">+24,4%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td>Abr</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 12.040</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 25.898</td><td>R$&nbsp;37.938,00</td><td><span class="pill">-42,9%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td>Mai</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 9.634</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 30.376</td><td>R$&nbsp;40.010,00</td><td><span class="pill">+5,5%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td>Jun</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 12.711</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 26.630</td><td>R$&nbsp;39.341,00</td><td><span class="pill">-1,7%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td>Jul</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 14.265</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 58.640</td><td>R$&nbsp;72.905,00</td><td><span class="pill">+85,3%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
-<tr><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Ago</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 14.095</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 49.708</td><td>R$&nbsp;63.803,00</td><td><span class="pill">-12,5%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr></tbody>
+<tr><td>Jan</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 25.513</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 49.702</td><td>R$&nbsp;75.215</td><td>–</td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td>Fev</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 10.863</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 42.546</td><td>R$&nbsp;53.409</td><td><span class="pill">-29,0%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td>Mar</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 20.881</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 45.565</td><td>R$&nbsp;66.446</td><td><span class="pill">+24,4%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td>Abr</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 12.040</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 25.898</td><td>R$&nbsp;37.938</td><td><span class="pill">-42,9%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td>Mai</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 9.634</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 30.376</td><td>R$&nbsp;40.010</td><td><span class="pill">+5,5%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td>Jun</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 12.711</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 26.630</td><td>R$&nbsp;39.341</td><td><span class="pill">-1,7%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td>Jul</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 14.265</td><td contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">R$ 58.640</td><td>R$&nbsp;72.905</td><td><span class="pill">+85,3%</span></td><td class="row-actions"><button class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha" type="button">×</button></td></tr>
+<tr><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">Ago</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 14.095</td><td contenteditable="false" data-cx-editable="true" data-cx-blur-bound="1">R$ 49.708</td><td>R$&nbsp;63.803</td><td><span class="pill">-12,5%</span></td><td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeMesRow(this)" title="Excluir linha">×</button></td></tr></tbody>
 </table>
 <button class="add-card-btn" onclick="addMesRow()" type="button">+ Adicionar mês</button>
+</div>
 </div>
 </div>
 </section>
@@ -1952,7 +2007,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
     });
   })();
 
-  new Chart(document.getElementById('chartCsat'), {
+  const csatChart = new Chart(document.getElementById('chartCsat'), {
     type:'bar',
     data:{ labels:['jan','fev','mar','abr','mai','jun','jul'],
       datasets:[
@@ -1978,6 +2033,55 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
         } } }
   });
 
+  // Tabela "CSAT — Evolução Mensal": edição de meses, valores e meta sincronizada com o gráfico
+  function updateCsatFromTable(){
+    const table = document.getElementById('tblCsat');
+    if(!table || typeof csatChart === 'undefined') return;
+    const rows = Array.from(table.tBodies[0].rows);
+    const parseNum = s => {
+      const n = parseFloat(String(s).replace('%','').replace(',', '.').trim());
+      return isNaN(n) ? 0 : n;
+    };
+    const labels = [], csatVals = [], metaVals = [];
+    rows.forEach(r => {
+      labels.push(r.cells[0].textContent.trim());
+      const csatEl = r.querySelector('.val-csat');
+      const metaEl = r.querySelector('.val-meta');
+      csatVals.push(parseNum(csatEl ? csatEl.textContent : '0'));
+      metaVals.push(parseNum(metaEl ? metaEl.textContent : '90'));
+    });
+    csatChart.data.labels = labels;
+    csatChart.data.datasets[0].data = csatVals;
+    csatChart.data.datasets[1].data = metaVals;
+    csatChart.update();
+  }
+  function addCsatRow(){
+    const table = document.getElementById('tblCsat');
+    if(!table) return;
+    const tbody = table.tBodies[0];
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">novo</td>' +
+      '<td class="val-csat" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">0</td>' +
+      '<td class="val-meta" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">90</td>' +
+      '<td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeCsatRow(this)" title="Excluir mês">×</button></td>';
+    tbody.appendChild(tr);
+    updateCsatFromTable();
+  }
+  function removeCsatRow(btn){
+    const tr = btn.closest('tr');
+    tr.remove();
+    updateCsatFromTable();
+  }
+  (function initCsatTable(){
+    const table = document.getElementById('tblCsat');
+    if(!table) return;
+    table.addEventListener('input', e => {
+      if(e.target && e.target.matches('td[contenteditable="true"]')) updateCsatFromTable();
+    });
+    updateCsatFromTable();
+  })();
+
   const trocasChart = new Chart(document.getElementById('chartTrocas'), {
     type:'bar',
     data:{ labels:['jan','fev','mar','abr','mai','jun','jul'],
@@ -1986,10 +2090,10 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
         { label:'Troca', data:[25145.65,12790.70,27619.15,12775,9803.08,12711,13610], backgroundColor:'#D9C79A', stack:'s', borderRadius:3 }
       ]},
     options:{ maintainAspectRatio:false,
-      scales:{ x:{ grid:{ display:false }, stacked:true }, y:{ stacked:true, ticks:{ color:'#6F716B', font:{ family:"'Aptos', 'Segoe UI', Arial, sans-serif", style:'normal', weight:400, size:10 }, callback:v=>'R$ '+(v/1000)+'k' }, grid:{ color:'#EDE6D6' } } },
+      scales:{ x:{ grid:{ display:false }, stacked:true, ticks:{ font:{ family:"'Aptos', 'Segoe UI', Arial, sans-serif", size:13 } } }, y:{ stacked:true, ticks:{ color:'#6F716B', font:{ family:"'Aptos', 'Segoe UI', Arial, sans-serif", style:'normal', weight:400, size:13 }, callback:v=>'R$ '+Math.round(v).toLocaleString('pt-BR') }, grid:{ color:'#EDE6D6' } } },
       plugins:{
-        legend:{ display:true, position:'top', align:'center', labels:{ boxWidth:11, boxHeight:11, padding:16, usePointStyle:false, font:{ size:12, weight:600 } } },
-        datalabels:{ color:'#FFFFFF', font:{ family:"'Aptos', 'Segoe UI', Arial, sans-serif", style:'normal', weight:500, size:10 }, formatter:v=>'R$ '+(v/1000).toFixed(0)+'k' } } }
+        legend:{ display:true, position:'top', align:'center', labels:{ boxWidth:11, boxHeight:11, padding:16, usePointStyle:false, font:{ size:13, weight:600 } } },
+        datalabels:{ color:'#FFFFFF', font:{ family:"'Aptos', 'Segoe UI', Arial, sans-serif", style:'normal', weight:600, size:12 }, formatter:v=>'R$ '+Math.round(v).toLocaleString('pt-BR') } } }
   });
 
 
@@ -2016,7 +2120,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
       const devolucao = parseBRLCell(row.cells[2].textContent);
       const total = troca + devolucao;
       trocas.push(troca); devolucoes.push(devolucao); totais.push(total);
-      row.cells[3].textContent = formatBRL(total, 2);
+      row.cells[3].textContent = formatBRL(total, 0);
       if(i === 0){
         row.cells[4].textContent = '–';
       } else {
@@ -2161,6 +2265,29 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
   }
 
   // Tabela "Evolução dos Contatos sobre Problemas na Entrega": incluir e remover meses
+  // Coluna "Total de Contatos": visibilidade controlada só pelo admin, mas o estado
+  // escolhido vale para todos que visualizarem a página (persistido e enviado ao publicar).
+  const TOTAL_MES_HIDDEN_KEY = 'cx-overview-jul26-total-mes-hidden';
+  function applyTotalMesVisibility(hidden){
+    const table = document.getElementById('tblEntrega');
+    if(table) table.classList.toggle('hide-total-mes', hidden);
+    const btn = document.getElementById('toggleTotalMesBtn');
+    if(btn) btn.textContent = (hidden ? '⚙ Mostrar' : '⚙ Ocultar') + ' coluna "Total de Contatos"';
+  }
+  function toggleTotalMesColumn(){
+    if(!requireEditMode()) return;
+    const table = document.getElementById('tblEntrega');
+    if(!table) return;
+    const hidden = !table.classList.contains('hide-total-mes');
+    applyTotalMesVisibility(hidden);
+    try{ localStorage.setItem(TOTAL_MES_HIDDEN_KEY, hidden ? '1' : '0'); }catch(e){}
+    scheduleGithubSync();
+  }
+  (function initTotalMesVisibility(){
+    let hidden = false;
+    try{ hidden = localStorage.getItem(TOTAL_MES_HIDDEN_KEY) === '1'; }catch(e){}
+    applyTotalMesVisibility(hidden);
+  })();
   function addEntregaRow(){
     const table = document.getElementById('tblEntrega');
     if(!table) return;
@@ -2169,7 +2296,8 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
     tr.innerHTML =
       '<td contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">Novo mês</td>' +
       '<td class="val-problema" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">0</td>' +
-      '<td class="pct-total-auto">0%</td>' +
+      '<td class="val-total-mes" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1">—</td>' +
+      '<td class="pct-total-auto">–</td>' +
       '<td class="val-entrega" contenteditable="true" data-cx-editable="true" data-cx-blur-bound="1" style="font-weight:600;">0</td>' +
       '<td class="pct-dentro-auto">0%</td>' +
       '<td class="row-actions"><button type="button" class="remove-row-btn" onclick="removeEntregaRow(this)" title="Excluir linha">×</button></td>';
@@ -2195,23 +2323,60 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
       const n = parseFloat(String(s).replace(/[^\d.,-]/g, '').replace(/\.(?=\d{3}(\D|$))/g, '').replace(',', '.'));
       return isNaN(n) ? 0 : n;
     };
-    const problemaVals = rows.map(r => parseNum(r.querySelector('.val-problema') ? r.querySelector('.val-problema').textContent : '0'));
-    const totalProblema = problemaVals.reduce((a,b) => a+b, 0);
-    rows.forEach((r, i) => {
-      const problema = problemaVals[i];
+    const severityClass = (pct, low, high) => pct >= high ? 'bad' : (pct >= low ? 'mid' : 'good');
+    rows.forEach(r => {
+      const problema = parseNum(r.querySelector('.val-problema') ? r.querySelector('.val-problema').textContent : '0');
+      const totalMesEl = r.querySelector('.val-total-mes');
+      const totalMes = totalMesEl ? parseNum(totalMesEl.textContent) : 0;
       const entregaEl = r.querySelector('.val-entrega');
       const entrega = parseNum(entregaEl ? entregaEl.textContent : '0');
       const pctTotalEl = r.querySelector('.pct-total-auto');
       const pctDentroEl = r.querySelector('.pct-dentro-auto');
-      if(pctTotalEl) pctTotalEl.textContent = totalProblema > 0 ? Math.round((problema/totalProblema)*100) + '%' : '0%';
-      if(pctDentroEl) pctDentroEl.textContent = problema > 0 ? Math.round((entrega/problema)*100) + '%' : '0%';
+      if(pctTotalEl){
+        if(totalMes > 0){
+          const pctTotal = Math.round((problema/totalMes)*100);
+          pctTotalEl.innerHTML = '<span class="pill ' + severityClass(pctTotal,10,15) + '">' + pctTotal + '%</span>';
+        } else {
+          pctTotalEl.textContent = '–';
+        }
+      }
+      if(pctDentroEl){
+        const pctDentro = problema > 0 ? Math.round((entrega/problema)*100) : 0;
+        pctDentroEl.innerHTML = '<span class="pill ' + severityClass(pctDentro,30,45) + '">' + pctDentro + '%</span>';
+      }
     });
+    updateProblemasEntregaCards(rows, parseNum);
+  }
+
+  // Card "Problemas na Entrega": resumo executivo derivado do último mês da tabela acima
+  function updateProblemasEntregaCards(rows, parseNum){
+    if(!rows || !rows.length) return;
+    const data = rows.map(r => ({
+      mes: r.cells[0].textContent.trim(),
+      problema: parseNum(r.querySelector('.val-problema') ? r.querySelector('.val-problema').textContent : '0'),
+      totalMes: parseNum(r.querySelector('.val-total-mes') ? r.querySelector('.val-total-mes').textContent : '0'),
+      entrega: parseNum(r.querySelector('.val-entrega') ? r.querySelector('.val-entrega').textContent : '0')
+    }));
+    const last = data[data.length - 1];
+    const prev = data.length > 1 ? data[data.length - 2] : null;
+    const pctTotal = last.totalMes > 0 ? Math.round((last.problema/last.totalMes)*100) : null;
+    const pctDentro = last.problema > 0 ? Math.round((last.entrega/last.problema)*100) : 0;
+    const variacao = (prev && prev.entrega > 0) ? Math.round(((last.entrega - prev.entrega)/prev.entrega)*100) : null;
+    const maxPctDentro = Math.max.apply(null, data.map(d => d.problema > 0 ? Math.round((d.entrega/d.problema)*100) : 0));
+    const set = (id, txt) => { const el = document.getElementById(id); if(el) el.textContent = txt; };
+    set('probEntregaNoMes', last.problema);
+    set('probEntregaNoMesSub', pctTotal === null ? 'Total de contatos do mês não informado' : pctTotal + '% do total de contatos');
+    set('probEntregaNaEntrega', last.entrega);
+    set('probEntregaNaEntregaSub', pctDentro + '% dos contatos de problema');
+    set('probEntregaVariacao', variacao === null ? '–' : (variacao >= 0 ? '+' : '') + variacao + '%');
+    set('probEntregaVariacaoSub', prev ? (prev.entrega + ' em ' + prev.mes.toLowerCase() + ' para ' + last.entrega + ' em ' + last.mes.toLowerCase()) : '—');
+    set('probEntregaConcentracao', maxPctDentro + '%');
   }
   (function initEntregaTable(){
     const table = document.getElementById('tblEntrega');
     if(!table) return;
     table.addEventListener('input', e => {
-      if(e.target && e.target.classList && (e.target.classList.contains('val-problema') || e.target.classList.contains('val-entrega'))){
+      if(e.target && e.target.classList && (e.target.classList.contains('val-problema') || e.target.classList.contains('val-entrega') || e.target.classList.contains('val-total-mes'))){
         recalcEntregaTable();
       }
     });
