@@ -2139,13 +2139,31 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
   function recalcPercAcumulado(tableId){
     const table = document.getElementById(tableId);
     if(!table) return;
+    // Se a tabela tiver data-total-base definido, "% do Total" e "% Acumulado"
+    // são recalculados a partir da Qtde. Devolvida bruta ÷ total do período.
+    // Isso evita o erro de somar percentuais já arredondados linha a linha
+    // (que faz o acumulado "estufar" nas últimas linhas do Pareto).
+    const totalBaseRaw = table.getAttribute('data-total-base');
+    const totalBase = totalBaseRaw ? parseFloat(totalBaseRaw.replace(',', '.')) : NaN;
+    const useTotal = Number.isFinite(totalBase) && totalBase > 0;
     let acc = 0;
     Array.from(table.tBodies[0].rows).forEach(row => {
       const pctCell = row.querySelector('.pct-total');
       const acumCell = row.querySelector('.pct-acum');
       if(!pctCell || !acumCell) return;
-      const raw = pctCell.textContent.replace('%', '').trim().replace(',', '.');
-      const n = parseFloat(raw);
+      let n;
+      if(useTotal){
+        const qtyEl = row.querySelector('td:nth-child(3) .num-val');
+        const qtyRaw = qtyEl ? qtyEl.textContent.replace(/\./g, '').replace(',', '.').trim() : '';
+        const qty = parseFloat(qtyRaw);
+        if(Number.isFinite(qty)){
+          n = qty / totalBase * 100;
+          pctCell.textContent = n.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1});
+        }
+      } else {
+        const raw = pctCell.textContent.replace('%', '').trim().replace(',', '.');
+        n = parseFloat(raw);
+      }
       if(Number.isFinite(n)){
         acc += n;
         acumCell.textContent = acc.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
@@ -2184,7 +2202,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
       const table = document.getElementById(tableId);
       if(!table) return;
       table.addEventListener('input', e => {
-        if(e.target && e.target.classList && e.target.classList.contains('pct-total')) recalcPercAcumulado(tableId);
+        if(e.target && e.target.classList && e.target.classList.contains('num-val')) recalcPercAcumulado(tableId);
       });
       recalcPercAcumulado(tableId);
     });
