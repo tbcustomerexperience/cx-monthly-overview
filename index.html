@@ -57,61 +57,139 @@ footer{background:var(--paper);border-top:0;margin:0;padding:0 6vw 45px;text-ali
 
       <div class="current-label">Relatório mais recente</div>
 
-      <!-- MÊS ATUAL -->
-      <!-- Para publicar um novo mês: troque o número/ano do badge, o texto do mês e o href abaixo,
-           e mova o mês anterior para dentro do grupo de ano correspondente em <div class="history"> -->
-      <div class="cover-current">
+      <!-- MÊS ATUAL (preenchido automaticamente pelo script no final da página) -->
+      <div class="cover-current" id="currentReport">
         <div class="date-badge">
-          <span class="num">08</span>
-          <span class="yr">2026</span>
+          <span class="num">–</span>
+          <span class="yr"></span>
         </div>
         <div class="info">
           <div class="label">Overview mensal</div>
-          <div class="month">Agosto 2026</div>
+          <div class="month">Carregando…</div>
         </div>
-        <a href="./agosto-2026.html">Abrir relatório <span>›</span></a>
       </div>
     </section>
 
     <div class="content-inner">
-      <!-- HISTÓRICO -->
-      <!-- REGRA DE ORDENAÇÃO: os relatórios mais recentes sempre aparecem primeiro.
-           1) Novo ano → cria um novo <div class="year-group"> no TOPO de .history (acima dos anos anteriores).
-           2) Novo mês dentro do mesmo ano → insere o <a class="history-card"> no TOPO do .history-grid daquele ano.
-           A ordem no HTML é a ordem de exibição (não há reordenação automática por data). -->
+      <!-- HISTÓRICO (montado automaticamente pelo script no final da página:
+           anos e meses em ordem do mais recente para o mais antigo) -->
       <div class="history" id="historico">
         <div class="history-head">
           <h2>Histórico de meses anteriores</h2>
-          <span class="count">1 relatório</span>
+          <span class="count" id="historyCount"></span>
         </div>
-
-        <!-- Exemplo de como adicionar um mês ao arquivar (dentro de um year-group, sempre no TOPO do grid):
-        <div class="year-group">
-          <div class="year-label">2026</div>
-          <div class="history-grid">
-            <a class="history-card" href="./junho-2026.html">
-              <span class="month-name">Junho</span>
-              <span class="arrow">→</span>
-            </a>
-          </div>
-        </div>
-        -->
-
-        <div class="year-group">
-          <div class="year-label">2026</div>
-          <div class="history-grid">
-            <a class="history-card" href="./julho-2026.html">
-              <span class="month-name">Julho</span>
-              <span class="arrow">→</span>
-            </a>
-          </div>
-        </div>
+        <div id="historyList"></div>
       </div>
     </div>
 
   </div>
 
   <footer>Tania Bulhões · Customer Experience</footer>
+
+<script>
+/* Monta capa + histórico automaticamente a partir dos arquivos "mes-ano.html" do repositório.
+   Para publicar um mês novo basta subir o arquivo (ex: outubro-2026.html) — não precisa editar este index. */
+(function(){
+  var REPO_API = 'https://api.github.com/repos/tbcustomerexperience/cx-monthly-overview/contents/?ref=main';
+  var CACHE_KEY = 'cx-monthly-files-v1';
+  var CACHE_TTL = 5 * 60 * 1000; // 5 min
+  var MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  var INDEX = { janeiro:1, fevereiro:2, marco:3, 'março':3, abril:4, maio:5, junho:6, julho:7, agosto:8, setembro:9, outubro:10, novembro:11, dezembro:12 };
+
+  function parseFiles(names){
+    var out = [];
+    names.forEach(function(name){
+      var m = /^([a-zç]+)-(\d{4})\.html$/i.exec(name);
+      if(!m) return;
+      var mes = INDEX[m[1].toLowerCase()];
+      if(!mes) return;
+      out.push({ name:name, mes:mes, ano:parseInt(m[2],10) });
+    });
+    out.sort(function(a,b){ return (b.ano - a.ano) || (b.mes - a.mes); });
+    return out;
+  }
+
+  function readCache(ignoreTtl){
+    try{
+      var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if(c && c.names && (ignoreTtl || Date.now() - c.t < CACHE_TTL)) return c.names;
+    }catch(e){}
+    return null;
+  }
+  function writeCache(names){
+    try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ t:Date.now(), names:names })); }catch(e){}
+  }
+
+  function fetchNames(){
+    var cached = readCache(false);
+    if(cached) return Promise.resolve(cached);
+    return fetch(REPO_API, { cache:'no-store' })
+      .then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(list){
+        var names = list.filter(function(f){ return f.type === 'file'; }).map(function(f){ return f.name; });
+        writeCache(names);
+        return names;
+      })
+      .catch(function(err){
+        var stale = readCache(true);
+        if(stale) return stale;
+        throw err;
+      });
+  }
+
+  // Evita link quebrado: se o arquivo mais novo ainda não terminou de ser publicado, mostra o anterior.
+  function dropIfNotLive(files){
+    if(!files.length) return Promise.resolve(files);
+    return fetch('./' + encodeURI(files[0].name), { method:'HEAD', cache:'no-store' })
+      .then(function(r){ return r.ok ? files : files.slice(1); })
+      .catch(function(){ return files; });
+  }
+
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  function render(files){
+    var cur = document.getElementById('currentReport');
+    var list = document.getElementById('historyList');
+    var count = document.getElementById('historyCount');
+    if(!files.length){
+      cur.innerHTML = '<div class="date-badge"><span class="num">–</span></div><div class="info"><div class="label">Overview mensal</div><div class="month">Nenhum relatório publicado</div></div>';
+      list.innerHTML = '';
+      count.textContent = '';
+      return;
+    }
+    var latest = files[0];
+    cur.innerHTML =
+      '<div class="date-badge"><span class="num">' + pad(latest.mes) + '</span><span class="yr">' + latest.ano + '</span></div>' +
+      '<div class="info"><div class="label">Overview mensal</div><div class="month">' + MESES[latest.mes - 1] + ' ' + latest.ano + '</div></div>' +
+      '<a href="./' + encodeURI(latest.name) + '">Abrir relatório <span>›</span></a>';
+
+    var older = files.slice(1);
+    count.textContent = older.length + (older.length === 1 ? ' relatório' : ' relatórios');
+    if(!older.length){
+      list.innerHTML = '<div class="history-empty">Nenhum mês arquivado ainda.</div>';
+      return;
+    }
+    var html = '', year = null;
+    older.forEach(function(f){
+      if(f.ano !== year){
+        if(year !== null) html += '</div></div>';
+        year = f.ano;
+        html += '<div class="year-group"><div class="year-label">' + f.ano + '</div><div class="history-grid">';
+      }
+      html += '<a class="history-card" href="./' + encodeURI(f.name) + '"><span class="month-name">' + MESES[f.mes - 1] + '</span><span class="arrow">→</span></a>';
+    });
+    html += '</div></div>';
+    list.innerHTML = html;
+  }
+
+  fetchNames()
+    .then(function(names){ return dropIfNotLive(parseFiles(names)); })
+    .then(render)
+    .catch(function(){
+      document.querySelector('#currentReport .month').textContent = 'Não foi possível carregar os relatórios agora. Recarregue a página em instantes.';
+    });
+})();
+</script>
 
 </body>
 </html>
