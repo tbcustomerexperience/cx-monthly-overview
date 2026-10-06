@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<html lang="pt-BR" data-cx-saved="1791317608074"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Overview CX · Tania Bulhões · Julho 2026</title>
 <link href="https://fonts.googleapis.com/" rel="preconnect">
@@ -1667,7 +1667,7 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
   // ===== edit mode =====
   const editBtn = document.getElementById('editBtn');
   const saveNote = document.getElementById('saveNote');
-  const STORAGE_KEY = 'cx-overview-set26-edits';
+  const STORAGE_KEY = 'cx-overview-set26-edits-v3';
 
   // Registra todos os campos permitidos para edição.
   // Além dos campos já marcados no HTML, todos os textos dos cards KPI ficam editáveis
@@ -1730,7 +1730,20 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
   });
 
   // ===== estado de imagens e cards =====
-  const MEDIA_STATE_KEY = 'cx-overview-jul26-media-state-v2';
+  const MEDIA_STATE_KEY = 'cx-overview-set26-media-state-v3';
+
+  // ===== Proteção das edições guardadas no navegador =====
+  // As edições locais são gravadas pela POSIÇÃO do campo. Se o arquivo mudou (linhas/cards a mais ou a menos, outra versão
+  // do arquivo aberta no mesmo navegador), aplicar essas posições embaralha textos e tabelas. Por isso só valem se:
+  //  (a) foram feitas DEPOIS de este arquivo ser gerado/salvo (data-cx-saved) e (b) a estrutura da página é a mesma.
+  const FILE_STAMP = parseInt(document.documentElement.getAttribute('data-cx-saved') || '0', 10) || 0;
+  function structureSig(){
+    const els = Array.from(document.querySelectorAll('[data-cx-editable="true"]'));
+    const str = els.map(el => { const sl = el.closest('.slide'); return (sl ? sl.dataset.slide : 'g') + '|' + el.tagName + '|' + (el.id || '') + '|' + ((el.dataset && el.dataset.editKey) || ''); }).join('\n');
+    let h = 2166136261;
+    for(let i = 0; i < str.length; i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return (h >>> 0).toString(36) + ':' + els.length;
+  }
 
   function saveMediaState(){
     try{
@@ -1739,6 +1752,7 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
         const el = document.getElementById(id);
         if(el) state[id] = el.innerHTML;
       });
+      state.__ts = Date.now();
       localStorage.setItem(MEDIA_STATE_KEY, JSON.stringify(state));
       scheduleGithubSync();
     }catch(e){}
@@ -1747,6 +1761,7 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
   function loadMediaState(){
     try{
       const state = JSON.parse(localStorage.getItem(MEDIA_STATE_KEY) || '{}');
+      if(!(state.__ts > FILE_STAMP)) return;   // cópia mais antiga que o arquivo: o arquivo vale
       ['publicacoesGrid','destaquesGrid','aconteceuGrid'].forEach(id=>{
         const el = document.getElementById(id);
         if(el && state[id]) el.innerHTML = state[id];
@@ -1771,6 +1786,10 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
   function loadEdits(){
     let saved;
     try{ saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }catch(e){ saved = {}; }
+    if(!(saved.__ts > FILE_STAMP) || saved.__sig !== structureSig()){
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      return;
+    }
     editableFields.forEach(el=>{
       try{
         const key = pathFor(el);
@@ -1782,6 +1801,9 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
     try{
       let saved;
       try{ saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }catch(e){ saved = {}; }
+      const sig = structureSig();
+      if(saved.__sig !== sig || !(saved.__ts > FILE_STAMP)) saved = {};   // descarta posições antigas
+      saved.__sig = sig; saved.__ts = Date.now();
       saved[pathFor(el)] = el.innerHTML;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
       saveNote.classList.add('show');
@@ -1802,6 +1824,7 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
         const slide = el.closest('.slide');
         if(slide) saved[pathFor(el)] = el.innerHTML;
       });
+      saved.__sig = structureSig(); saved.__ts = Date.now();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
       saveChannels();
       saveMediaState();
@@ -2689,6 +2712,7 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
       const cleanEditBtn = cleanRoot.querySelector('#editBtn');
       if(cleanEditBtn){ cleanEditBtn.textContent = 'Ativar edição'; cleanEditBtn.classList.remove('on'); }
       cleanRoot.querySelectorAll('[contenteditable]').forEach(el=> el.setAttribute('contenteditable','false'));
+      cleanRoot.setAttribute('data-cx-saved', String(Date.now()));
       // abre sempre na capa: não grava o slide que estava aberto no momento do salvamento
       cleanRoot.querySelectorAll('.slide.active').forEach(n => n.classList.remove('active'));
       const _capa = cleanRoot.querySelector('.slide[data-slide="1"]'); if(_capa) _capa.classList.add('active');
