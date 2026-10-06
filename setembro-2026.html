@@ -961,10 +961,10 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 <h3 contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="margin:0;">Problemas na Entrega</h3>
 <div contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="border:1px solid var(--line); border-radius:100px; padding:6px 16px; font-size:11px; color:var(--ink-soft); font-weight:600; letter-spacing:.02em; flex-shrink:0;">Jan a Ago 2026</div>
 </div>
-<div class="kpi-row n4">
+<div class="kpi-row n3" style="max-width:none;">
 <div class="kpi-card">
 <div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Problemas no Mês</div>
-<div class="val" id="probEntregaNoMes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">81</div>
+<div class="val" id="probEntregaNoMes" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">154</div>
 <div class="delta flat" id="probEntregaNoMesSub" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">11% do total de contatos</div>
 </div>
 <div class="kpi-card">
@@ -976,11 +976,6 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
 <div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Variação vs. Mês Anterior</div>
 <div class="val" id="probEntregaVariacao" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">-47%</div>
 <div class="delta flat" id="probEntregaVariacaoSub" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">154 em ago para 81 em set</div>
-</div>
-<div class="kpi-card highlight">
-<div class="lbl" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Concentração do Período</div>
-<div class="val" id="probEntregaConcentracao" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">60%</div>
-<div class="delta flat" contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true">Maior participação do período</div>
 </div>
 </div>
 <h3 contenteditable="false" data-cx-blur-bound="1" data-cx-editable="true" style="margin:26px 0 14px;">Evolução dos Contatos sobre Problemas na Entrega</h3>
@@ -1513,7 +1508,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
   // ===== edit mode =====
   const editBtn = document.getElementById('editBtn');
   const saveNote = document.getElementById('saveNote');
-  const STORAGE_KEY = 'cx-overview-jul26-edits';
+  const STORAGE_KEY = 'cx-overview-set26-edits';
 
   // Registra todos os campos permitidos para edição.
   // Além dos campos já marcados no HTML, todos os textos dos cards KPI ficam editáveis
@@ -2323,7 +2318,6 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
     const pctTotal = last.totalMes > 0 ? Math.round((last.problema/last.totalMes)*100) : null;
     const pctDentro = last.problema > 0 ? Math.round((last.entrega/last.problema)*100) : 0;
     const variacao = (prev && prev.entrega > 0) ? Math.round(((last.entrega - prev.entrega)/prev.entrega)*100) : null;
-    const maxPctDentro = Math.max.apply(null, data.map(d => d.problema > 0 ? Math.round((d.entrega/d.problema)*100) : 0));
     const set = (id, txt) => { const el = document.getElementById(id); if(el) el.textContent = txt; };
     set('probEntregaNoMes', last.problema);
     set('probEntregaNoMesSub', pctTotal === null ? 'Total de contatos do mês não informado' : pctTotal + '% do total de contatos');
@@ -2331,7 +2325,6 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
     set('probEntregaNaEntregaSub', pctDentro + '% dos contatos de problema');
     set('probEntregaVariacao', variacao === null ? '–' : (variacao >= 0 ? '+' : '') + variacao + '%');
     set('probEntregaVariacaoSub', prev ? (prev.entrega + ' em ' + prev.mes.toLowerCase() + ' para ' + last.entrega + ' em ' + last.mes.toLowerCase()) : '—');
-    set('probEntregaConcentracao', maxPctDentro + '%');
   }
   (function initEntregaTable(){
     const table = document.getElementById('tblEntrega');
@@ -2350,6 +2343,7 @@ html, body, main, .main, .content, .page, .page-content, .slide, .dashboard-cont
     refreshChartsInSlide(activeSlide);
   }
   window.addEventListener('load', () => setTimeout(refreshAllVisibleCharts, 80));
+  window.addEventListener('load', () => setTimeout(recalcEntregaTable, 120));
   window.addEventListener('resize', () => setTimeout(refreshAllVisibleCharts, 80));
 
   // Termômetro de sentimento: marcador acompanha automaticamente o valor exibido
