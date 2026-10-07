@@ -461,7 +461,7 @@
   body.edit-mode .remove-row-btn{display:inline-flex;}
   .remove-row-btn:hover{background:#fff; color:var(--bad); border-color:var(--bad);}
   @media print{.row-actions, .row-actions-th{display:none !important;}}
-  table.tb + .add-card-btn{margin-top:12px;}
+  table.tb + .add-card-btn, .tb-scroll + .add-card-btn{margin-top:12px;}
   #tblProdutos td.row-num, #tblDefeitoAvaria td.row-num{text-align:center;}
 
   /* Editor de fatias dos gráficos de rosca — visível apenas em modo de edição */
@@ -1056,6 +1056,9 @@ body.edit-mode #cxFmtBar{display:block;}
 
 </style>
 <meta id="bbafmabaelnnkondpfpjmdklbmfnbmol"><meta id="dcngeagmmhegagicpcmpinaoklddcgon"><style id="responsive-desk-mobile">
+/* Tabelas rolam para o lado dentro da própria área, sem deslocar título e textos do card */
+.tb-scroll{width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.tb-scroll > table.tb{margin-top:0;}
 /* ===== Responsividade desktop / tablet / celular ===== */
 .slide-inner{-webkit-overflow-scrolling:touch; overscroll-behavior:contain;}
 
@@ -1112,7 +1115,8 @@ body.edit-mode #cxFmtBar{display:block;}
   .slide[data-slide="8"] .kpi-row.n6{
     grid-template-columns:repeat(2, minmax(0,1fr)) !important; gap:10px !important; max-width:none !important;
   }
-  .kpi-card{padding:14px 10px !important;}
+  .kpi-row{grid-auto-rows:1fr;}
+  .kpi-card{padding:14px 10px !important; justify-content:center;}
   .slide[data-slide="7"] .kpi-card,
   .slide[data-slide="8"] .kpi-card{height:auto !important; min-height:118px !important;}
   .kpi-card .lbl{font-size:10px !important; letter-spacing:.06em !important; overflow-wrap:anywhere;}
@@ -3802,5 +3806,18 @@ Anna Carolina Bassi recebeu a linha comemorativa de 20 anos de Chá Branco e mos
   sync();
 })();
 
+</script>
+<script id="responsive-table-wrap">
+(function(){
+  function wrapTables(){
+    document.querySelectorAll('table.tb').forEach(function(t){
+      if(t.parentElement && t.parentElement.classList.contains('tb-scroll')) return;
+      var w=document.createElement('div'); w.className='tb-scroll';
+      var mt=t.style.marginTop; if(mt){ w.style.marginTop=mt; }
+      t.parentNode.insertBefore(w,t); w.appendChild(t);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',wrapTables); else wrapTables();
+})();
 </script>
 </body></html>
